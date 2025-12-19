@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {Share2 } from 'lucide-react';
-import { 
-  Sparkles, Shield, Brain, Users, BookOpen, 
-  TrendingUp, CheckCircle, AlertTriangle, 
+import { Share2 } from 'lucide-react';
+import {
+  Sparkles, Shield, Brain, Users, BookOpen,
+  TrendingUp, CheckCircle, AlertTriangle,
   ArrowRight, Zap, Target, Globe,
   BarChart3, Smartphone, Download,
   Star, Clock, Award, Cpu, Database, Cloud,
@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 const Home = ({ currentUser }) => {
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
-  
+
   const [checkContent, setCheckContent] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [hoveredFeature, setHoveredFeature] = useState(null);
@@ -37,6 +37,27 @@ const Home = ({ currentUser }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // URLs Google pour chaque bouton
+  const googleUrls = {
+    dashboard: 'https://www.google.com/search?q=tableau+de+bord+analyse+fake+news',
+    learn: 'https://www.google.com/search?q=modules+apprentissage+litt%C3%A9ratie+m%C3%A9diatique',
+    register: 'https://www.google.com/search?q=inscription+gratuite+v%C3%A9rification+fake+news',
+    login: 'https://www.google.com/search?q=connexion+plateforme+fact+checking',
+    demo: 'https://www.google.com/search?q=d%C3%A9monstration+IA+d%C3%A9tection+fake+news',
+    analysisDemo: 'https://www.google.com/search?q=analyse+contenu+suspect+IA',
+    whatsappAlert: 'https://www.google.com/search?q=alerte+whatsapp+fake+news+d%C3%A9tection',
+    fakeNewsModule: 'https://www.google.com/search?q=module+d%C3%A9tection+fake+news+formation',
+    sourcesModule: 'https://www.google.com/search?q=sources+fiables+information+Madagascar',
+    sharingModule: 'https://www.google.com/search?q=partage+responsable+information+%C3%A9thique',
+    apiDocs: 'https://www.google.com/search?q=API+fact+checking+d%C3%A9tection+fake+news',
+    about: 'https://www.google.com/search?q=plateforme+mpanolotsaina+AI+Madagascar',
+    contact: 'https://www.google.com/search?q=contact+support+fact+checking',
+    privacy: 'https://www.google.com/search?q=politique+confidentialit%C3%A9+plateforme+fact+checking',
+    terms: 'https://www.google.com/search?q=conditions+utilisation+v%C3%A9rification+contenu',
+    github: 'https://www.google.com/search?q=projet+open+source+fact+checking+github',
+    faq: 'https://www.google.com/search?q=FAQ+v%C3%A9rification+fake+news+frequently+asked+questions'
+  };
 
   // Images locales à importer dans votre projet
   const images = {
@@ -78,28 +99,32 @@ const Home = ({ currentUser }) => {
       title: "IA Intelligente",
       description: "Analyse automatique des contenus douteux avec notre modèle BLOOM optimisé pour le malgache",
       color: "primary",
-      delay: 0.1
+      delay: 0.1,
+      url: googleUrls.analysisDemo
     },
     {
       icon: <Shield className="w-10 h-10" />,
       title: "Protection en Temps Réel",
       description: "Alertes avant partage sur WhatsApp et réseaux sociaux",
       color: "secondary",
-      delay: 0.2
+      delay: 0.2,
+      url: googleUrls.whatsappAlert
     },
     {
       icon: <GraduationCap className="w-10 h-10" />,
       title: "Apprentissage Interactif",
       description: "Modules éducatifs pour développer l'esprit critique des étudiants",
       color: "accent",
-      delay: 0.3
+      delay: 0.3,
+      url: googleUrls.learn
     },
     {
       icon: <Languages className="w-10 h-10" />,
       title: "100% Malagasy",
       description: "Interface et analyses disponibles en malgache, français et anglais",
       color: "warning",
-      delay: 0.4
+      delay: 0.4,
+      url: googleUrls.about
     }
   ];
 
@@ -109,28 +134,32 @@ const Home = ({ currentUser }) => {
       title: "Coller",
       description: "Copiez le contenu suspect depuis Facebook, WhatsApp ou autre",
       icon: <Search className="w-6 h-6" />,
-      color: "from-blue-500 to-cyan-400"
+      color: "from-blue-500 to-cyan-400",
+      url: googleUrls.analysisDemo
     },
     {
       number: "02",
       title: "Analyser",
       description: "Notre IA examine le texte, les images et le contexte",
       icon: <Brain className="w-6 h-6" />,
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      url: googleUrls.analysisDemo
     },
     {
       number: "03",
       title: "Comprendre",
       description: "Recevez une explication claire en malgache sur les biais détectés",
       icon: <Eye className="w-6 h-6" />,
-      color: "from-green-500 to-emerald-400"
+      color: "from-green-500 to-emerald-400",
+      url: googleUrls.analysisDemo
     },
     {
       number: "04",
       title: "Partager",
       description: "Diffusez l'information avec une alerte de fiabilité",
       icon: <ShieldAlert className="w-6 h-6" />,
-      color: "from-orange-500 to-red-400"
+      color: "from-orange-500 to-red-400",
+      url: googleUrls.whatsappAlert
     }
   ];
 
@@ -139,49 +168,53 @@ const Home = ({ currentUser }) => {
       value: "10,000+",
       label: "Contenus analysés",
       icon: <Database className="w-6 h-6" />,
-      description: "Base de données enrichie quotidiennement"
+      description: "Base de données enrichie quotidiennement",
+      url: googleUrls.analysisDemo
     },
     {
       value: "94.2%",
       label: "Précision",
       icon: <Target className="w-6 h-6" />,
-      description: "Sur le corpus malgache"
+      description: "Sur le corpus malgache",
+      url: googleUrls.apiDocs
     },
     {
       value: "< 3s",
       label: "Analyse rapide",
       icon: <Zap className="w-6 h-6" />,
-      description: "Temps moyen de vérification"
+      description: "Temps moyen de vérification",
+      url: googleUrls.analysisDemo
     },
     {
       value: "50+",
       label: "Écoles",
       icon: <Users className="w-6 h-6" />,
-      description: "Utilisent notre plateforme"
+      description: "Utilisent notre plateforme",
+      url: googleUrls.about
     }
   ];
 
   const handleCheckContent = async () => {
     if (!checkContent.trim()) return;
-    
+
     setIsAnalyzing(true);
     setTimeout(() => {
-      navigate("/check", { 
-        state: { 
+      navigate("/check", {
+        state: {
           content: checkContent,
           isDemo: false
-        } 
+        }
       });
       setIsAnalyzing(false);
     }, 1500);
   };
 
   const handleQuickDemo = () => {
-    navigate("/check", { 
-      state: { 
+    navigate("/check", {
+      state: {
         content: "Ny voanjo dia manasitrana ny kansera amin'ny 3 andro fotsiny!",
         isDemo: true
-      } 
+      }
     });
   };
 
@@ -194,7 +227,7 @@ const Home = ({ currentUser }) => {
     <div className="min-h-screen bg-gradient-to-b from-white via-primary-50/20 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 overflow-hidden">
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 z-50">
-        <motion.div 
+        <motion.div
           className="h-full bg-gradient-to-r from-primary-500 to-secondary-500"
           style={{ width: `${scrollProgress}%` }}
         />
@@ -204,16 +237,16 @@ const Home = ({ currentUser }) => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background avec effet de particules */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-secondary-500/5" />
-        
+
         {/* Éléments décoratifs animés */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-primary-400/20 rounded-full"
-              initial={{ 
+              initial={{
                 x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight 
+                y: Math.random() * window.innerHeight
               }}
               animate={{
                 y: [null, -20, 20, -10],
@@ -231,7 +264,7 @@ const Home = ({ currentUser }) => {
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Texte principal */}
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeInUp}
@@ -298,14 +331,14 @@ const Home = ({ currentUser }) => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <textarea
                     value={checkContent}
                     onChange={(e) => setCheckContent(e.target.value)}
                     placeholder="Ex: 'Ny voanjo dia manasitrana ny kansera...'"
                     className="w-full h-32 px-4 py-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none placeholder:text-neutral-400"
                   />
-                  
+
                   <div className="flex flex-col sm:flex-row gap-3 mt-4">
                     <button
                       onClick={handleCheckContent}
@@ -324,7 +357,7 @@ const Home = ({ currentUser }) => {
                         </>
                       )}
                     </button>
-                    
+
                     <button
                       onClick={handleQuickDemo}
                       className="px-6 py-3 border-2 border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg font-medium transition-colors hover:border-primary-600"
@@ -343,37 +376,46 @@ const Home = ({ currentUser }) => {
               >
                 {currentUser ? (
                   <>
-                    <Link
-                      to="/dashboard"
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-accent-600 to-primary-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-[1.02]"
+                    <a
+                      href={googleUrls.dashboard}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-accent-600 to-primary-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <BarChart3 className="w-5 h-5" />
                       Tableau de bord
-                    </Link>
-                    <Link
-                      to="/learn"
-                      className="inline-flex items-center gap-3 px-6 py-3 border-2 border-primary-500 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
+                    </a>
+                    <a
+                      href={googleUrls.learn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-6 py-3 border-2 border-primary-500 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <GraduationCap className="w-5 h-5" />
                       Modules d&#39;apprentissage
-                    </Link>
+                    </a>
                   </>
                 ) : (
                   <>
-                    <Link
-                      to="/register"
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-accent-600 to-primary-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-[1.02]"
+                    <a
+                      href={googleUrls.register}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-accent-600 to-primary-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <Zap className="w-5 h-5" />
                       Commencer gratuitement
-                    </Link>
-                    <Link
-                      to="/login"
-                      className="inline-flex items-center gap-3 px-6 py-3 border-2 border-primary-500 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
+                    </a>
+
+                    <a
+                      href={googleUrls.login}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-6 py-3 border-2 border-primary-500 text-primary-600 dark:text-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <ArrowRight className="w-5 h-5" />
                       Se connecter
-                    </Link>
+                    </a>
                   </>
                 )}
               </motion.div>
@@ -385,14 +427,20 @@ const Home = ({ currentUser }) => {
                 className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6"
               >
                 {stats.slice(0, 4).map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                  <a
+                    key={index}
+                    href={stat.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center group"
+                  >
+                    <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 transition-colors">
                       {stat.label}
                     </div>
-                  </div>
+                  </a>
                 ))}
               </motion.div>
             </motion.div>
@@ -434,7 +482,7 @@ const Home = ({ currentUser }) => {
                           Modèle BLOOM 560M
                         </span>
                       </div>
-                      
+
                       <div className="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 border-l-4 border-primary-500">
                         <p className="text-neutral-700 dark:text-neutral-300 italic">
                           &quot;Ny voanjo dia manasitrana ny kansera amin&#39;ny 3 andro...&quot;
@@ -497,19 +545,21 @@ const Home = ({ currentUser }) => {
                   transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
                   className="absolute -bottom-6 -left-6 bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-xl border border-neutral-200 dark:border-neutral-700 w-64"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-secondary-100 dark:bg-secondary-900/30 rounded-lg">
-                      <Users className="w-5 h-5 text-secondary-600" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900 dark:text-white">
-                        5,000+ étudiants
+                  <a href={googleUrls.about} target="_blank" rel="noopener noreferrer" className="block group">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-secondary-100 dark:bg-secondary-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                        <Users className="w-5 h-5 text-secondary-600" />
                       </div>
-                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                        Utilisent notre plateforme
+                      <div>
+                        <div className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          5,000+ étudiants
+                        </div>
+                        <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                          Utilisent notre plateforme
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </motion.div>
 
                 <motion.div
@@ -517,19 +567,21 @@ const Home = ({ currentUser }) => {
                   transition={{ duration: 2.5, repeat: Infinity, delay: 0.4 }}
                   className="absolute -top-6 -right-6 bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-xl border border-neutral-200 dark:border-neutral-700 w-64"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-accent-100 dark:bg-accent-900/30 rounded-lg">
-                      <Zap className="w-5 h-5 text-accent-600" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900 dark:text-white">
-                        2.3 secondes
+                  <a href={googleUrls.analysisDemo} target="_blank" rel="noopener noreferrer" className="block group">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-accent-100 dark:bg-accent-900/30 rounded-lg group-hover:scale-110 transition-transform">
+                        <Zap className="w-5 h-5 text-accent-600" />
                       </div>
-                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                        Analyse moyenne
+                      <div>
+                        <div className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          2.3 secondes
+                        </div>
+                        <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                          Analyse moyenne
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
@@ -561,7 +613,7 @@ const Home = ({ currentUser }) => {
               ?
             </h2>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
-              Une solution complète pour lutter contre la désinformation à Madagascar, 
+              Une solution complète pour lutter contre la désinformation à Madagascar,
               spécialement conçue pour les étudiants et éducateurs.
             </p>
           </motion.div>
@@ -580,7 +632,7 @@ const Home = ({ currentUser }) => {
                 className="relative group"
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500" />
-                <div className="relative bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
+                <a href={feature.url} target="_blank" rel="noopener noreferrer" className="relative block bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
                   <div className={`p-4 rounded-xl bg-${feature.color}-100 dark:bg-${feature.color}-900/30 w-fit mb-6 transition-transform duration-300 ${hoveredFeature === index ? 'scale-110 rotate-3' : ''}`}>
                     {feature.icon}
                   </div>
@@ -591,12 +643,12 @@ const Home = ({ currentUser }) => {
                     {feature.description}
                   </p>
                   <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-                    <div className="flex items-center text-primary-600 dark:text-primary-400">
+                    <div className="flex items-center text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
                       <span className="text-sm font-medium">En savoir plus</span>
                       <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
-                </div>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -626,7 +678,7 @@ const Home = ({ currentUser }) => {
           <div className="relative">
             {/* Ligne de connexion */}
             <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500/20 via-secondary-500/20 to-accent-500/20 -translate-y-1/2" />
-            
+
             <div className="grid lg:grid-cols-4 gap-8">
               {steps.map((step, index) => (
                 <motion.div
@@ -638,28 +690,28 @@ const Home = ({ currentUser }) => {
                   whileHover={{ scale: 1.05 }}
                   className="relative"
                 >
-                  <div className="relative bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
+                  <a href={step.url} target="_blank" rel="noopener noreferrer" className="relative block bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow group">
                     <div className={`absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg bg-gradient-to-r ${step.color}`}>
                       {step.number}
                     </div>
-                    
+
                     <div className="flex justify-center mb-6 mt-6">
-                      <div className={`p-4 rounded-xl bg-gradient-to-r ${step.color} bg-opacity-10`}>
+                      <div className={`p-4 rounded-xl bg-gradient-to-r ${step.color} bg-opacity-10 group-hover:scale-110 transition-transform`}>
                         {step.icon}
                       </div>
                     </div>
-                    
-                    <h3 className="text-xl font-bold text-center text-neutral-900 dark:text-white mb-3">
+
+                    <h3 className="text-xl font-bold text-center text-neutral-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {step.title}
                     </h3>
                     <p className="text-center text-neutral-600 dark:text-neutral-400">
                       {step.description}
                     </p>
-                    
+
                     <div className="mt-6 flex justify-center">
-                      <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${step.color}`} />
+                      <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${step.color} group-hover:scale-150 transition-transform`} />
                     </div>
-                  </div>
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -684,17 +736,17 @@ const Home = ({ currentUser }) => {
                   Fonctionnalité exclusive
                 </span>
               </div>
-              
+
               <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
                 Alerte IA avant{' '}
                 <span className="text-green-600">partage WhatsApp</span>
               </h2>
-              
+
               <p className="text-lg text-neutral-600 dark:text-neutral-400">
-                Notre innovation primée : une alerte intelligente qui vous prévient 
+                Notre innovation primée : une alerte intelligente qui vous prévient
                 avant de partager du contenu douteux sur WhatsApp.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
@@ -709,7 +761,7 @@ const Home = ({ currentUser }) => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                     <Brain className="w-5 h-5 text-blue-600" />
@@ -724,13 +776,18 @@ const Home = ({ currentUser }) => {
                   </div>
                 </div>
               </div>
-              
-              <button className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors">
+
+              <a
+                href={googleUrls.whatsappAlert}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors hover:scale-[1.02] active:scale-[0.98]"
+              >
                 <MessageSquare className="w-5 h-5" />
                 Tester l&#39;alerte WhatsApp
-              </button>
+              </a>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -749,39 +806,41 @@ const Home = ({ currentUser }) => {
                       <div className="text-sm text-neutral-400">Connexion sécurisée</div>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-3">
                     {/* Message reçu */}
                     <div className="bg-neutral-800 rounded-xl p-4 max-w-[80%]">
                       <p className="text-white">
-                        Regarde cette info incroyable ! Le voanjo guérit le cancer en 3 jours ! 
+                        Regarde cette info incroyable ! Le voanjo guérit le cancer en 3 jours !
                         Partage à tous tes contacts 🔥
                       </p>
                       <div className="text-xs text-neutral-400 mt-2">15:42</div>
                     </div>
-                    
+
                     {/* Alerte Mpanolo-tsaina */}
-                    <div className="bg-gradient-to-r from-warning-500/20 to-warning-600/20 rounded-xl p-4 border-l-4 border-warning-500">
-                      <div className="flex items-center gap-2 mb-2">
-                        <ShieldAlert className="w-4 h-4 text-warning-500" />
-                        <span className="font-semibold text-warning-500">
-                          Mpanolo-tsaina AI - Alerte
-                        </span>
+                    <a href={googleUrls.whatsappAlert} target="_blank" rel="noopener noreferrer" className="block group">
+                      <div className="bg-gradient-to-r from-warning-500/20 to-warning-600/20 rounded-xl p-4 border-l-4 border-warning-500 group-hover:border-warning-400 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                          <ShieldAlert className="w-4 h-4 text-warning-500" />
+                          <span className="font-semibold text-warning-500 group-hover:text-warning-400 transition-colors">
+                            Mpanolo-tsaina AI - Alerte
+                          </span>
+                        </div>
+                        <p className="text-sm text-white">
+                          ⚠️ Cette information présente un risque élevé de désinformation.
+                          Score de fiabilité : 2.3/5. Aucune source médicale vérifiée ne
+                          confirme cette affirmation.
+                        </p>
+                        <div className="flex gap-2 mt-3">
+                          <button className="flex-1 px-3 py-2 bg-warning-600 hover:bg-warning-700 text-white text-sm rounded-lg transition-colors">
+                            Voir l&#39;analyse complète
+                          </button>
+                          <button className="flex-1 px-3 py-2 bg-neutral-700 hover:bg-neutral-600 text-white text-sm rounded-lg transition-colors">
+                            Annuler le partage
+                          </button>
+                        </div>
                       </div>
-                      <p className="text-sm text-white">
-                        ⚠️ Cette information présente un risque élevé de désinformation. 
-                        Score de fiabilité : 2.3/5. Aucune source médicale vérifiée ne 
-                        confirme cette affirmation.
-                      </p>
-                      <div className="flex gap-2 mt-3">
-                        <button className="flex-1 px-3 py-2 bg-warning-600 hover:bg-warning-700 text-white text-sm rounded-lg transition-colors">
-                          Voir l&#39;analyse complète
-                        </button>
-                        <button className="flex-1 px-3 py-2 bg-neutral-700 hover:bg-neutral-600 text-white text-sm rounded-lg transition-colors">
-                          Annuler le partage
-                        </button>
-                      </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -824,7 +883,8 @@ const Home = ({ currentUser }) => {
                 icon: <Filter className="w-8 h-8" />,
                 lessons: "5 leçons",
                 time: "45 min",
-                students: "2,500+"
+                students: "2,500+",
+                url: googleUrls.fakeNewsModule
               },
               {
                 title: "Sources fiables MG",
@@ -832,7 +892,8 @@ const Home = ({ currentUser }) => {
                 icon: <Database className="w-8 h-8" />,
                 lessons: "7 leçons",
                 time: "60 min",
-                students: "1,800+"
+                students: "1,800+",
+                url: googleUrls.sourcesModule
               },
               {
                 title: "Partage responsable",
@@ -840,7 +901,8 @@ const Home = ({ currentUser }) => {
                 icon: <Share2 className="w-8 h-8" />,
                 lessons: "4 leçons",
                 time: "30 min",
-                students: "3,200+"
+                students: "3,200+",
+                url: googleUrls.sharingModule
               }
             ].map((module, index) => (
               <motion.div
@@ -852,26 +914,46 @@ const Home = ({ currentUser }) => {
                 whileHover={{ y: -5 }}
                 className="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all"
               >
-                <div className="p-3 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-xl w-fit mb-6">
-                  {module.icon}
-                </div>
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
-                  {module.title}
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-                  {module.description}
-                </p>
-                <div className="flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400">
-                  <span>{module.lessons}</span>
-                  <span>{module.time}</span>
-                  <span>{module.students} étudiants</span>
-                </div>
-                <button className="w-full mt-6 py-3 bg-gradient-to-r from-primary-500/10 to-primary-500/5 hover:from-primary-500/20 hover:to-primary-500/10 text-primary-600 dark:text-primary-400 rounded-lg font-medium transition-colors">
-                  Commencer le module
-                </button>
+                <a href={module.url} target="_blank" rel="noopener noreferrer" className="block group">
+                  <div className="p-3 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
+                    {module.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {module.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                    {module.description}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-400">
+                    <span>{module.lessons}</span>
+                    <span>{module.time}</span>
+                    <span>{module.students} étudiants</span>
+                  </div>
+                  <button className="w-full mt-6 py-3 bg-gradient-to-r from-primary-500/10 to-primary-500/5 hover:from-primary-500/20 hover:to-primary-500/10 text-primary-600 dark:text-primary-400 rounded-lg font-medium transition-colors group-hover:scale-[1.02]">
+                    Commencer le module
+                  </button>
+                </a>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <a
+              href={googleUrls.learn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-accent-500 text-accent-600 dark:text-accent-400 hover:bg-accent-50 dark:hover:bg-accent-900/30 rounded-lg font-medium transition-colors hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <GraduationCap className="w-5 h-5" />
+              Voir tous les modules d&#39;apprentissage
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
         </div>
       </section>
 
@@ -879,7 +961,7 @@ const Home = ({ currentUser }) => {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10" />
-        
+
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -893,43 +975,80 @@ const Home = ({ currentUser }) => {
             <p className="text-xl text-primary-100 mb-10">
               {pageT('ctaDescription')}
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to={currentUser ? "/dashboard" : "/register"}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-primary-50 transition-all hover:scale-105"
+              <a
+                href={googleUrls.register}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-primary-50 transition-all hover:scale-105 active:scale-95"
               >
                 <Zap className="w-5 h-5" />
                 {pageT('startFreeButton')}
-              </Link>
-              
-              <Link
-                to="/demo"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors"
+              </a>
+
+              <a
+                href={googleUrls.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors hover:scale-105 active:scale-95"
               >
                 <Play className="w-5 h-5" />
                 Voir la démo vidéo
-              </Link>
+              </a>
             </div>
-            
+
             <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">100%</div>
-                <div className="text-primary-200">Gratuit</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">24/7</div>
-                <div className="text-primary-200">Disponible</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">3</div>
-                <div className="text-primary-200">Langues</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">ODD 4 & 16</div>
-                <div className="text-primary-200">Objectifs</div>
-              </div>
+              {[
+                { value: "100%", label: "Gratuit", url: googleUrls.register },
+                { value: "24/7", label: "Disponible", url: googleUrls.about },
+                { value: "3", label: "Langues", url: googleUrls.about },
+                { value: "ODD 4 & 16", label: "Objectifs", url: googleUrls.about }
+              ].map((item, index) => (
+                <a
+                  key={index}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center group"
+                >
+                  <div className="text-3xl font-bold text-white group-hover:scale-110 transition-transform">
+                    {item.value}
+                  </div>
+                  <div className="text-primary-200 group-hover:text-white transition-colors">
+                    {item.label}
+                  </div>
+                </a>
+              ))}
             </div>
+
+            {/* Liens supplémentaires */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12 flex flex-wrap justify-center gap-6 text-primary-100"
+            >
+              <a href={googleUrls.privacy} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Confidentialité
+              </a>
+              <span className="text-primary-300">•</span>
+              <a href={googleUrls.terms} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Conditions d&#39;utilisation
+              </a>
+              <span className="text-primary-300">•</span>
+              <a href={googleUrls.contact} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Contact
+              </a>
+              <span className="text-primary-300">•</span>
+              <a href={googleUrls.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                GitHub
+              </a>
+              <span className="text-primary-300">•</span>
+              <a href={googleUrls.faq} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                FAQ
+              </a>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -937,7 +1056,6 @@ const Home = ({ currentUser }) => {
   );
 };
 
-// Composant Play pour l'icône manquante
 const Play = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />

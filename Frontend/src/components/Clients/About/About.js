@@ -69,26 +69,26 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-b from-white to-primary-50 dark:from-neutral-900 dark:to-neutral-950">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl"></div>
         <div className="relative max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center p-3 rounded-full bg-gradient-to-r from-blue-500 to-green-500 mb-6">
+          <div className="inline-flex items-center justify-center p-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 mb-6">
             <Brain className="h-8 w-8 text-white" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            {t('about_title')} <span className="text-blue-600 dark:text-blue-400">{t('about_subtitle')}</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
+            {t('about_title')} <span className="text-primary-600 dark:text-primary-400">{t('about_subtitle')}</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10">
+          <p className="text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto mb-10">
             {t('about_description')}
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+              <div key={index} className="bg-white/50 dark:bg-neutral-800/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700">
+                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">{stat.value}</div>
+                <div className="text-sm text-neutral-600 dark:text-neutral-400">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -100,18 +100,18 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('about_mission_title')} <span className="text-green-600 dark:text-green-400">{t('about_mission_highlight')}</span>
+              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">
+                {t('about_mission_title')} <span className="text-secondary-600 dark:text-secondary-400">{t('about_mission_highlight')}</span>
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
                 {t('about_mission_text1')}
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-lg text-neutral-600 dark:text-neutral-300">
                 {t('about_mission_text2')}
               </p>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl p-8 text-white">
+              <div className="bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl p-8 text-white">
                 <BookOpen className="h-12 w-12 mb-6" />
                 <h3 className="text-2xl font-bold mb-4">{t('about_literacy_title')}</h3>
                 <p className="opacity-90">
@@ -124,27 +124,27 @@ const About = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-gray-800/50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-neutral-800/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('about_features_title')} <span className="text-blue-600 dark:text-blue-400">{t('about_features_highlight')}</span>
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
+              {t('about_features_title')} <span className="text-primary-600 dark:text-primary-400">{t('about_features_highlight')}</span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
               {t('about_features_description')}
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="group bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-xl">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-r from-blue-100 to-green-100 dark:from-blue-900/30 dark:to-green-900/30 mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              <div key={index} className="group bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl">
+                <div className="inline-flex p-3 rounded-xl bg-gradient-to-r from-primary-100 to-secondary-100 dark:from-primary-900/30 dark:to-secondary-900/30 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-neutral-600 dark:text-neutral-300">
                   {feature.description}
                 </p>
               </div>
@@ -157,29 +157,29 @@ const About = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('about_team_title')} <span className="text-green-600 dark:text-green-400">{t('about_team_highlight')}</span>
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
+              {t('about_team_title')} <span className="text-secondary-600 dark:text-secondary-400">{t('about_team_highlight')}</span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
               {t('about_team_description')}
             </p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-500 to-green-500 p-1">
-                  <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <Users className="h-10 w-10 text-gray-600 dark:text-gray-300" />
+              <div key={index} className="bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 rounded-2xl p-6 text-center border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-shadow duration-300">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 p-1">
+                  <div className="w-full h-full rounded-full bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+                    <Users className="h-10 w-10 text-neutral-600 dark:text-neutral-300" />
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">
                   {member.name}
                 </h3>
-                <div className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-sm font-medium mb-3">
+                <div className="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 text-sm font-medium mb-3">
                   {member.role}
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                   {member.bio}
                 </p>
               </div>
@@ -189,7 +189,7 @@ const About = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-green-600">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-600 to-secondary-600">
         <div className="max-w-4xl mx-auto text-center text-white">
           <CheckCircle className="h-16 w-16 mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -199,7 +199,7 @@ const About = () => {
             {t('about_cta_description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold hover:bg-gray-100 transition-colors duration-300">
+            <button className="px-8 py-3 bg-white text-primary-600 rounded-full font-bold hover:bg-neutral-100 transition-colors duration-300">
               {t('about_cta_start')}
             </button>
             <button className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-colors duration-300">
@@ -212,11 +212,11 @@ const About = () => {
       {/* Footer Note */}
       <footer className="py-8 px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-4">
-            <Heart className="h-5 w-5 text-red-500 fill-current" />
+          <div className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 mb-4">
+            <Heart className="h-5 w-5 text-warning-500 fill-current" />
             <span>{t('about_footer_made_with')}</span>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-500">
+          <p className="text-sm text-neutral-500 dark:text-neutral-500">
             {t('about_footer_copyright').replace('{year}', new Date().getFullYear())}
           </p>
         </div>

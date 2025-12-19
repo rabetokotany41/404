@@ -234,8 +234,8 @@ const Header = ({ isAuthenticated = false, onLogout, currentUser = null }) => {
             </button>
 
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <span className="font-bold text-white">M</span>
+              <div className="h-16 w-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                <span className="font-bold text-white text-2xl">404</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-neutral-900 dark:text-white leading-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
