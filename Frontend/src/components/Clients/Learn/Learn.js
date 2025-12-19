@@ -174,7 +174,7 @@ const Learn = () => {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 mb-6">
                 <BookOpen className="h-5 w-5" />
-                <span className="font-medium">Centre d'Apprentissage</span>
+                <span className="font-medium">Centre d&apos;Apprentissage</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                 Devenez un expert en <span className="text-blue-600 dark:text-blue-400">vérification</span>
@@ -189,7 +189,7 @@ const Learn = () => {
                 </button>
                 <button className="px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-bold rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
                   <Play className="h-5 w-5 inline mr-2" />
-                  Vidéo d'introduction
+                  Vidéo d&apos;introduction
                 </button>
               </div>
             </div>
@@ -309,7 +309,7 @@ const Learn = () => {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4">
                 <CheckCircle className="h-8 w-8 text-green-500 mb-3" />
                 <p className="text-gray-700 dark:text-gray-300">
-                  Toujours vérifier la date de publication d'un article avant de le partager.
+                  Toujours vérifier la date de publication d&apos;un article avant de le partager.
                 </p>
               </div>
             </div>
@@ -466,7 +466,7 @@ const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center text-white">
           <Users className="h-16 w-16 mx-auto mb-6" />
           <h2 className="text-3xl font-bold mb-6">
-            Rejoignez notre communauté d'apprenants
+            Rejoignez notre communauté d&apos;apprenants
           </h2>
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
             Recevez chaque semaine de nouvelles ressources, des conseils pratiques et des alertes sur les dernières tendances en désinformation.
@@ -479,7 +479,7 @@ const Learn = () => {
                 className="flex-1 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
               />
               <button className="px-8 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-gray-100 transition-colors">
-                S'abonner
+                S&apos;abonner
               </button>
             </div>
             <p className="text-sm opacity-80 mt-4">

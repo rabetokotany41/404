@@ -1,68 +1,71 @@
 import React from 'react';
 import { Brain, Shield, Globe, Users, Zap, Award, BookOpen, BarChart, CheckCircle, Heart } from 'lucide-react';
+import { useTranslation } from '../../../contexts/LanguageContext';
 
 const About = () => {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: Brain,
-      title: 'Intelligence Artificielle Avancée',
-      description: 'Utilisation de modèles d\'IA pour analyser et vérifier l\'authenticité des contenus en ligne'
+      title: t('about_feature_ai'),
+      description: t('about_feature_ai_desc')
     },
     {
       icon: Shield,
-      title: 'Protection contre la Désinformation',
-      description: 'Système de détection des fake news et contenus trompeurs'
+      title: t('about_feature_protection'),
+      description: t('about_feature_protection_desc')
     },
     {
       icon: Globe,
-      title: 'Support Multilingue',
-      description: 'Analyse des contenus en Malagasy, Français et Anglais'
+      title: t('about_feature_multilingual'),
+      description: t('about_feature_multilingual_desc')
     },
     {
       icon: Users,
-      title: 'Communauté Engagée',
-      description: 'Réseau d\'utilisateurs contribuant à la vérification collective'
+      title: t('about_feature_community'),
+      description: t('about_feature_community_desc')
     },
     {
       icon: Zap,
-      title: 'Analyse Rapide',
-      description: 'Vérification en temps réel des contenus partagés'
+      title: t('about_feature_speed'),
+      description: t('about_feature_speed_desc')
     },
     {
       icon: Award,
-      title: 'Fiabilité Élevée',
-      description: 'Algorithmes éprouvés avec un taux de précision élevé'
+      title: t('about_feature_reliability'),
+      description: t('about_feature_reliability_desc')
     }
   ];
 
   const team = [
     {
-      name: 'Rakoto Andriana',
-      role: 'Expert IA & Fact-Checking',
-      bio: 'Spécialiste en analyse des médias avec 10 ans d\'expérience'
+      name: t('about_team_member1_name'),
+      role: t('about_team_member1_role'),
+      bio: t('about_team_member1_bio')
     },
     {
-      name: 'Rasoa Nomena',
-      role: 'Linguiste Computational',
-      bio: 'Expert en traitement automatique des langues malgache'
+      name: t('about_team_member2_name'),
+      role: t('about_team_member2_role'),
+      bio: t('about_team_member2_bio')
     },
     {
-      name: 'Jean Dupont',
-      role: 'Développeur Full-Stack',
-      bio: 'Architecte de la plateforme Mpanolo-tsaina AI'
+      name: t('about_team_member3_name'),
+      role: t('about_team_member3_role'),
+      bio: t('about_team_member3_bio')
     },
     {
-      name: 'Sarah Rabe',
-      role: 'Designer UX/UI',
-      bio: 'Créatrice de l\'expérience utilisateur intuitive'
+      name: t('about_team_member4_name'),
+      role: t('about_team_member4_role'),
+      bio: t('about_team_member4_bio')
     }
   ];
 
   const stats = [
-    { value: '10,000+', label: 'Contenus Vérifiés' },
-    { value: '98%', label: 'Précision d\'Analyse' },
-    { value: '50+', label: 'Sources Fiables' },
-    { value: '24/7', label: 'Disponibilité' }
+    { value: '10,000+', label: t('about_stats_verified') },
+    { value: '98%', label: t('about_stats_accuracy') },
+    { value: '50+', label: t('about_stats_sources') },
+    { value: '24/7', label: t('about_stats_availability') }
   ];
 
   return (
@@ -75,11 +78,10 @@ const About = () => {
             <Brain className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            À Propos de <span className="text-blue-600 dark:text-blue-400">Mpanolo-tsaina AI</span>
+            {t('about_title')} <span className="text-blue-600 dark:text-blue-400">{t('about_subtitle')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10">
-            Notre mission est de combattre la désinformation et de promouvoir la littératie médiatique 
-            à travers une intelligence artificielle dédiée à la vérification des faits.
+            {t('about_description')}
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
@@ -99,26 +101,21 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Notre <span className="text-green-600 dark:text-green-400">Mission</span>
+                {t('about_mission_title')} <span className="text-green-600 dark:text-green-400">{t('about_mission_highlight')}</span>
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                Dans un monde où l'information circule à vitesse grand V, il devient crucial de disposer 
-                d'outils fiables pour distinguer le vrai du faux. Mpanolo-tsaina AI ("Assistant Intelligent" 
-                en malgache) a été créé pour répondre à ce besoin urgent.
+                {t('about_mission_text1')}
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Nous croyons que l'accès à une information vérifiée est un droit fondamental. 
-                Notre plateforme utilise des technologies d'intelligence artificielle avancées 
-                pour analyser, vérifier et noter la fiabilité des contenus en ligne.
+                {t('about_mission_text2')}
               </p>
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl p-8 text-white">
                 <BookOpen className="h-12 w-12 mb-6" />
-                <h3 className="text-2xl font-bold mb-4">Littératie Médiatique</h3>
+                <h3 className="text-2xl font-bold mb-4">{t('about_literacy_title')}</h3>
                 <p className="opacity-90">
-                  Nous éduquons les utilisateurs à développer leur esprit critique 
-                  et à mieux comprendre les mécanismes de l'information numérique.
+                  {t('about_literacy_text')}
                 </p>
               </div>
             </div>
@@ -131,11 +128,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Nos <span className="text-blue-600 dark:text-blue-400">Fonctionnalités</span>
+              {t('about_features_title')} <span className="text-blue-600 dark:text-blue-400">{t('about_features_highlight')}</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Découvrez les technologies innovantes qui font de Mpanolo-tsaina AI 
-              l'outil de référence pour la vérification des informations.
+              {t('about_features_description')}
             </p>
           </div>
           
@@ -162,10 +158,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Notre <span className="text-green-600 dark:text-green-400">Équipe</span>
+              {t('about_team_title')} <span className="text-green-600 dark:text-green-400">{t('about_team_highlight')}</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Une équipe passionnée et multidisciplinaire au service de la vérité numérique.
+              {t('about_team_description')}
             </p>
           </div>
           
@@ -197,17 +193,17 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           <CheckCircle className="h-16 w-16 mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Rejoignez la lutte contre la désinformation
+            {t('about_cta_title')}
           </h2>
           <p className="text-xl opacity-90 mb-8">
-            Ensemble, créons un écosystème numérique plus sain et plus fiable.
+            {t('about_cta_description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold hover:bg-gray-100 transition-colors duration-300">
-              Commencer la Vérification
+              {t('about_cta_start')}
             </button>
             <button className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-colors duration-300">
-              En Savoir Plus
+              {t('about_cta_learn_more')}
             </button>
           </div>
         </div>
@@ -218,11 +214,10 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-4">
             <Heart className="h-5 w-5 text-red-500 fill-current" />
-            <span>Fabriqué avec passion à Madagascar</span>
+            <span>{t('about_footer_made_with')}</span>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            © {new Date().getFullYear()} Mpanolo-tsaina AI. Tous droits réservés.
-            Nous nous engageons à respecter la vie privée et à promouvoir une information éthique.
+            {t('about_footer_copyright').replace('{year}', new Date().getFullYear())}
           </p>
         </div>
       </footer>

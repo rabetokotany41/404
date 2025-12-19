@@ -92,13 +92,12 @@ const Register = ({ onLogin }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          first_name: formData.firstName,
-          last_name: formData.lastName,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           email: formData.email,
           phone: formData.phone || null,
           company: formData.company || null,
           position: formData.position || null,
-          industry: formData.industry || null,
           password: formData.password,
         }),
       });
@@ -201,24 +200,24 @@ const Register = ({ onLogin }) => {
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-accent-500 to-accent-600 flex items-center justify-center mb-3">
                         <Sparkles className="h-5 w-5 text-white" />
                       </div>
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">AI Powered</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Smart recommendations</p>
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">Alimenté par IA</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Recommandations intelligentes</p>
                     </div>
 
                     <div className="bg-gradient-to-br from-secondary-50 to-secondary-100/50 dark:from-secondary-900/30 dark:to-secondary-800/20 rounded-2xl p-4">
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-secondary-500 to-secondary-600 flex items-center justify-center mb-3">
                         <Users className="h-5 w-5 text-white" />
                       </div>
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">Team Ready</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Collaborate seamlessly</p>
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">Prêt pour l&apos;équipe</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Collaborez sans effort</p>
                     </div>
 
                     <div className="bg-gradient-to-br from-primary-50/50 to-accent-50/50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-4">
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center mb-3">
                         <Globe className="h-5 w-5 text-white" />
                       </div>
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">Global Access</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Available worldwide</p>
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-1">Accès mondial</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400">Disponible partout dans le monde</p>
                     </div>
                   </div>
 
@@ -230,9 +229,9 @@ const Register = ({ onLogin }) => {
                       </div>
                       <div>
                         <p className="text-sm text-neutral-700 dark:text-neutral-300 italic">
-                          "The registration process was seamless. I was up and running in minutes!"
+                          &ldquo;Le processus d&apos;inscription était fluide. J&apos;étais opérationnel en quelques minutes !&rdquo;
                         </p>
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">— John Doe, CEO at TechCorp</p>
+                        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">— Jean Dupont, PDG de TechCorp</p>
                       </div>
                     </div>
                   </div>
@@ -261,10 +260,10 @@ const Register = ({ onLogin }) => {
                     <UserPlus className="h-8 w-8 text-white" />
                   </div>
                   <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">
-                    Join Our Community
+                    Rejoignez notre communauté
                   </h2>
                   <p className="text-neutral-600 dark:text-neutral-400 mt-2">
-                    Create your premium account in {3 - step} steps
+                    Créez votre compte premium en {3 - step} étapes
                   </p>
                 </div>
 
@@ -276,7 +275,7 @@ const Register = ({ onLogin }) => {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="group">
                           <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                            First Name
+                            Prénom
                           </label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -289,14 +288,14 @@ const Register = ({ onLogin }) => {
                               value={formData.firstName}
                               onChange={handleChange}
                               className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                              placeholder="John"
+                              placeholder="Jean"
                             />
                           </div>
                         </div>
 
                         <div className="group">
                           <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                            Last Name
+                            Nom
                           </label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -309,7 +308,7 @@ const Register = ({ onLogin }) => {
                               value={formData.lastName}
                               onChange={handleChange}
                               className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                              placeholder="Doe"
+                              placeholder="Dupont"
                             />
                           </div>
                         </div>
@@ -317,7 +316,7 @@ const Register = ({ onLogin }) => {
 
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Email Address
+                          Adresse email
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -330,14 +329,14 @@ const Register = ({ onLogin }) => {
                             value={formData.email}
                             onChange={handleChange}
                             className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                            placeholder="john@example.com"
+                            placeholder="jean@example.com"
                           />
                         </div>
                       </div>
 
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Phone Number
+                          Numéro de téléphone
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -349,7 +348,7 @@ const Register = ({ onLogin }) => {
                             value={formData.phone}
                             onChange={handleChange}
                             className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                            placeholder="+1 (555) 123-4567"
+                            placeholder="+261 34 12 345 67"
                           />
                         </div>
                       </div>
@@ -361,7 +360,7 @@ const Register = ({ onLogin }) => {
                     <div className="space-y-5 animate-fadeIn">
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Company Name
+                          Nom de l&apos;entreprise
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -380,7 +379,7 @@ const Register = ({ onLogin }) => {
 
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Position/Role
+                          Poste/Fonction
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -392,14 +391,14 @@ const Register = ({ onLogin }) => {
                             value={formData.position}
                             onChange={handleChange}
                             className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                            placeholder="Software Engineer"
+                            placeholder="Ingénieur logiciel"
                           />
                         </div>
                       </div>
 
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Industry
+                          Secteur d&apos;activité
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -408,12 +407,12 @@ const Register = ({ onLogin }) => {
                           <select
                             className="pl-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300 appearance-none"
                           >
-                            <option value="">Select Industry</option>
-                            <option value="tech">Technology</option>
+                            <option value="">Sélectionnez le secteur</option>
+                            <option value="tech">Technologie</option>
                             <option value="finance">Finance</option>
-                            <option value="healthcare">Healthcare</option>
-                            <option value="education">Education</option>
-                            <option value="other">Other</option>
+                            <option value="healthcare">Santé</option>
+                            <option value="education">Éducation</option>
+                            <option value="other">Autre</option>
                           </select>
                           <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                             <svg className="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -430,7 +429,7 @@ const Register = ({ onLogin }) => {
                     <div className="space-y-5 animate-fadeIn">
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Password
+                          Mot de passe
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -443,7 +442,7 @@ const Register = ({ onLogin }) => {
                             value={formData.password}
                             onChange={handleChange}
                             className="pl-12 pr-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                            placeholder="Create a strong password"
+                            placeholder="Créez un mot de passe fort"
                           />
                           <button
                             type="button"
@@ -462,9 +461,9 @@ const Register = ({ onLogin }) => {
                         {formData.password && (
                           <div className="mt-3">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-xs text-neutral-600 dark:text-neutral-400">Password Strength</span>
+                              <span className="text-xs text-neutral-600 dark:text-neutral-400">Force du mot de passe</span>
                               <span className={`text-xs font-bold ${passwordStrength < 50 ? 'text-red-500' : passwordStrength < 75 ? 'text-yellow-500' : 'text-accent-500'}`}>
-                                {passwordStrength < 50 ? 'Weak' : passwordStrength < 75 ? 'Good' : 'Strong'}
+                                {passwordStrength < 50 ? 'Faible' : passwordStrength < 75 ? 'Bon' : 'Fort'}
                               </span>
                             </div>
                             <div className="h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
@@ -476,19 +475,19 @@ const Register = ({ onLogin }) => {
                             <div className="grid grid-cols-2 gap-2 mt-2">
                               <div className={`flex items-center text-xs ${formData.password.length >= 8 ? 'text-accent-500' : 'text-neutral-500'}`}>
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                Min 8 characters
+                                Min 8 caractères
                               </div>
                               <div className={`flex items-center text-xs ${/[A-Z]/.test(formData.password) ? 'text-accent-500' : 'text-neutral-500'}`}>
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                Uppercase letter
+                                Lettre majuscule
                               </div>
                               <div className={`flex items-center text-xs ${/[0-9]/.test(formData.password) ? 'text-accent-500' : 'text-neutral-500'}`}>
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                Number
+                                Chiffre
                               </div>
                               <div className={`flex items-center text-xs ${/[^A-Za-z0-9]/.test(formData.password) ? 'text-accent-500' : 'text-neutral-500'}`}>
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                Special character
+                                Caractère spécial
                               </div>
                             </div>
                           </div>
@@ -497,7 +496,7 @@ const Register = ({ onLogin }) => {
 
                       <div className="group">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                          Confirm Password
+                          Confirmer le mot de passe
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -510,7 +509,7 @@ const Register = ({ onLogin }) => {
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             className="pl-12 pr-12 block w-full px-4 py-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-2xl bg-white/50 dark:bg-neutral-800/50 text-neutral-900 dark:text-white placeholder-neutral-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-900 transition-all duration-300"
-                            placeholder="Confirm your password"
+                            placeholder="Confirmez votre mot de passe"
                           />
                           <button
                             type="button"
@@ -527,7 +526,7 @@ const Register = ({ onLogin }) => {
                         {formData.confirmPassword && formData.password === formData.confirmPassword && (
                           <p className="mt-2 text-sm text-accent-500 flex items-center">
                             <CheckCircle className="h-4 w-4 mr-1" />
-                            Passwords match
+                            Les mots de passe correspondent
                           </p>
                         )}
                       </div>
@@ -545,13 +544,13 @@ const Register = ({ onLogin }) => {
                         </div>
                         <div className="ml-3 text-sm">
                           <label htmlFor="agreed" className="text-neutral-700 dark:text-neutral-300">
-                            I agree to the{' '}
+                            J&apos;accepte les{' '}
                             <Link to="/terms" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">
-                              Terms of Service
+                              Conditions d&apos;utilisation
                             </Link>{' '}
-                            and{' '}
+                            et la{' '}
                             <Link to="/privacy" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">
-                              Privacy Policy
+                              Politique de confidentialité
                             </Link>
                           </label>
                         </div>
@@ -567,7 +566,7 @@ const Register = ({ onLogin }) => {
                         onClick={prevStep}
                         className="px-6 py-3 border-2 border-neutral-300 dark:border-neutral-700 rounded-2xl text-neutral-700 dark:text-neutral-300 font-medium hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
                       >
-                        ← Back
+                        ← Retour
                       </button>
                     ) : (
                       <div></div>
@@ -579,7 +578,7 @@ const Register = ({ onLogin }) => {
                         onClick={nextStep}
                         className="px-8 py-3 rounded-2xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium hover:from-primary-600 hover:to-accent-600 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25"
                       >
-                        Continue →
+                        Continuer →
                       </button>
                     ) : (
                       <button
@@ -594,7 +593,7 @@ const Register = ({ onLogin }) => {
                             <UserPlus className="h-5 w-5 text-white" />
                           )}
                         </span>
-                        {loading ? 'Creating Account...' : 'Create Account'}
+                        {loading ? 'Création du compte...' : 'Créer un compte'}
                       </button>
                     )}
                   </div>

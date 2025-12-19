@@ -35,7 +35,7 @@ const Footer = ({ currentUser, isAuthenticated, onLogout }) => {
                 </div>
               </div>
               <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                Une plateforme d'administration moderne et intuitive pour gérer vos projets efficacement.
+                Une plateforme d&apos;administration moderne et intuitive pour gérer vos projets efficacement.
               </p>
               <div className="flex items-center space-x-4">
                 <SocialLink href="#" icon={<Twitter className="h-5 w-5" />} label="Twitter" />
@@ -124,7 +124,7 @@ const Footer = ({ currentUser, isAuthenticated, onLogout }) => {
                   className="flex-1 px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
                 />
                 <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-300">
-                  S'abonner
+                  S&apos;abonner
                 </button>
               </div>
             </div>
@@ -146,7 +146,7 @@ const Footer = ({ currentUser, isAuthenticated, onLogout }) => {
                   <span>et</span>
                   <Coffee className="h-4 w-4 text-amber-600" />
                   <span>par</span>
-                  <span className="font-medium text-primary-600 dark:text-primary-400">L'équipe Nexus</span>
+                  <span className="font-medium text-primary-600 dark:text-primary-400">L&apos;équipe Nexus</span>
                 </div>
               </div>
 
@@ -156,7 +156,7 @@ const Footer = ({ currentUser, isAuthenticated, onLogout }) => {
                   Politique de confidentialité
                 </a>
                 <a href="/terms" className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                  Conditions d'utilisation
+                  Conditions d&apos;utilisation
                 </a>
                 <a href="/cookies" className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                   Cookies

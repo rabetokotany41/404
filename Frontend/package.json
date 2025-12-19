@@ -12,6 +12,9 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.2",
+    "framer-motion": "^12.23.26",
+    "idb": "^8.0.0",
+    "localforage": "^1.10.0",
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -21,13 +24,31 @@
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.8.1",
     "three": "^0.181.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "workbox-background-sync": "^7.0.0",
+    "workbox-broadcast-update": "^7.0.0",
+    "workbox-cacheable-response": "^7.0.0",
+    "workbox-core": "^7.0.0",
+    "workbox-expiration": "^7.0.0",
+    "workbox-google-analytics": "^7.0.0",
+    "workbox-navigation-preload": "^7.0.0",
+    "workbox-precaching": "^7.0.0",
+    "workbox-range-requests": "^7.0.0",
+    "workbox-routing": "^7.0.0",
+    "workbox-strategies": "^7.0.0",
+    "workbox-streams": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:pwa": "react-scripts build && workbox generateSW workbox-config.js",
+    "test:coverage": "npm test -- --coverage --watchAll=false",
+    "test:e2e": "cypress run",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "analyze": "npm run build && npx serve -s build -l 3001"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +69,12 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.18"
+    "cypress": "^13.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "serve": "^14.2.1",
+    "tailwindcss": "^3.4.18",
+    "workbox-cli": "^7.0.0"
   }
 }

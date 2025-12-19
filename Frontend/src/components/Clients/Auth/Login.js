@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  Mail, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  LogIn, 
-  Github, 
-  Twitter,
-  Sparkles,
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  LogIn,
   Shield,
-  Smartphone,
-  Fingerprint,
   AlertCircle,
   CheckCircle
 } from 'lucide-react';
@@ -26,10 +21,13 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('email');
-  const [hoverEffect, setHoverEffect] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    // Nettoyer au chargement
+    console.log('Login component mounted');
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,36 +39,13 @@ const Login = ({ onLogin }) => {
     if (success) setSuccess('');
   };
 
-  // Fonction pour nettoyer et valider le token
-  const cleanToken = (token) => {
-    if (!token) return null;
-    
-    let cleanToken = token.trim();
-    
-    // Enlever les guillemets
-    if (cleanToken.startsWith('"') && cleanToken.endsWith('"')) {
-      cleanToken = cleanToken.slice(1, -1);
-    }
-    if (cleanToken.startsWith("'") && cleanToken.endsWith("'")) {
-      cleanToken = cleanToken.slice(1, -1);
-    }
-    
-    // Vérifier que c'est un JWT valide (doit contenir 3 parties séparées par des points)
-    const parts = cleanToken.split('.');
-    if (parts.length !== 3) {
-      console.error('Token invalide: pas 3 parties JWT');
-      return null;
-    }
-    
-    return cleanToken;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
-    
+
+    // Validation
     if (!formData.email.trim() || !formData.password.trim()) {
       setError('Veuillez remplir tous les champs');
       setLoading(false);
@@ -85,8 +60,8 @@ const Login = ({ onLogin }) => {
     }
 
     try {
-      console.log('🔄 Tentative de connexion...');
-      
+      console.log('Tentative de connexion avec:', formData.email);
+
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email: formData.email,
         password: formData.password,
@@ -97,199 +72,200 @@ const Login = ({ onLogin }) => {
         timeout: 10000
       });
 
+      console.log('📦 Réponse complète:', response);
+      console.log('📊 Données de réponse:', response.data);
+
       const data = response.data;
 
-      console.log('📊 Réponse du serveur:', {
-        success: data.success,
-        message: data.message,
-        hasToken: !!data.token,
-        tokenLength: data.token?.length,
-        user: data.user?.email
-      });
+      // Analyser la structure de la réponse
+      let token = null;
+      let user = null;
+      let message = '';
 
-      if (data.success && data.token) {
-        // Nettoyer le token
-        const cleanTokenValue = cleanToken(data.token);
-        
-        if (!cleanTokenValue) {
-          setError('Token reçu invalide. Veuillez réessayer.');
-          setLoading(false);
-          return;
-        }
-
-        console.log('✅ Token nettoyé:', cleanTokenValue.substring(0, 30) + '...');
-        console.log('📏 Longueur:', cleanTokenValue.length);
-        
-        // Stocker les données
-        localStorage.setItem('authToken', cleanTokenValue);
-        localStorage.setItem('userData', JSON.stringify(data.user));
-        localStorage.setItem('userEmail', data.user.email);
-        
-        // Stocker le rôle
-        const role = data.user.role || 'user';
-        localStorage.setItem('userRole', role);
-        
-        if (rememberMe) {
-          localStorage.setItem('rememberMe', 'true');
-          localStorage.setItem('rememberedEmail', formData.email);
-        } else {
-          localStorage.removeItem('rememberMe');
-          localStorage.removeItem('rememberedEmail');
-        }
-
-        setSuccess('Connexion réussie ! Redirection en cours...');
-
-        // Appeler le callback parent
-        if (onLogin) {
-          onLogin(data.user, cleanTokenValue);
-        }
-
-        // Tester immédiatement le token avec une API call
-        try {
-          const testResponse = await axios.get('http://localhost:5000/api/auth/profile', {
-            headers: {
-              'Authorization': `Bearer ${cleanTokenValue}`,
-              'Content-Type': 'application/json'
-            }
-          });
-          
-          console.log('✅ Token validé avec succès par API:', testResponse.data);
-        } catch (testError) {
-          console.warn('⚠️ Token API test échoué:', testError.response?.data);
-        }
-
-        // Redirection
-        setTimeout(() => {
-          if (role === 'admin') {
-            navigate('/admin/');
-          } else {
-            navigate('/dashboard');
-          }
-        }, 1500);
-
-      } else {
-        setError(data.message || 'Email ou mot de passe incorrect');
+      // Différentes structures possibles
+      if (data.token) {
+        token = data.token;
+      } else if (data.data?.token) {
+        token = data.data.token;
+      } else if (data.access_token) {
+        token = data.access_token;
       }
-      
-      setLoading(false);
-      
+
+      if (data.user) {
+        user = data.user;
+      } else if (data.data?.user) {
+        user = data.data.user;
+      } else if (data.userData) {
+        user = data.userData;
+      }
+
+      if (data.message) {
+        message = data.message;
+      }
+
+      console.log('🔍 Données extraites:', { token, user, message });
+
+      if (data.success === true || data.status === 'success') {
+        if (token) {
+          // Nettoyer le token
+          let cleanToken = token.trim();
+          if (cleanToken.startsWith('"') && cleanToken.endsWith('"')) {
+            cleanToken = cleanToken.slice(1, -1);
+          }
+
+          console.log('✅ Token nettoyé:', cleanToken.substring(0, 30) + '...');
+
+          // Nettoyer le localStorage
+          localStorage.clear();
+
+          // Stocker les données
+          localStorage.setItem('authToken', cleanToken);
+
+          if (user) {
+            localStorage.setItem('userData', JSON.stringify(user));
+            console.log('👤 Utilisateur stocké:', user);
+          } else {
+            // Créer un objet utilisateur basique
+            const basicUser = {
+              email: formData.email,
+              name: formData.email.split('@')[0],
+              role: 'user'
+            };
+            localStorage.setItem('userData', JSON.stringify(basicUser));
+            user = basicUser;
+          }
+
+          if (rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('rememberedEmail', formData.email);
+          }
+
+          setSuccess(message || 'Connexion réussie ! Redirection en cours...');
+
+          // Appeler le callback parent
+          if (onLogin && typeof onLogin === 'function') {
+            console.log('📞 Appel du callback onLogin...');
+            try {
+              onLogin(user, cleanToken);
+            } catch (callbackError) {
+              console.error('Erreur callback:', callbackError);
+            }
+          }
+
+          // Redirection après 1 seconde
+          setTimeout(() => {
+            console.log('🔄 Redirection vers /');
+            window.location.href = '/';
+          }, 1000);
+
+        } else {
+          // Pas de token mais succès quand même (pour debug)
+          console.warn('⚠️ Succès mais pas de token reçu');
+          setSuccess('Connexion réussie (debug) ! Stockage des données...');
+
+          // Stocker quand même pour tester
+          const basicUser = {
+            email: formData.email,
+            name: formData.email.split('@')[0],
+            role: 'user'
+          };
+
+          localStorage.setItem('userData', JSON.stringify(basicUser));
+          localStorage.setItem('authToken', 'debug-token-' + Date.now());
+
+          if (onLogin && typeof onLogin === 'function') {
+            onLogin(basicUser, 'debug-token');
+          }
+
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1000);
+        }
+      } else {
+        setError(message || 'Email ou mot de passe incorrect');
+        setLoading(false);
+      }
+
     } catch (error) {
       console.error('❌ Erreur de connexion:', error);
-      
-      if (error.code === 'ECONNABORTED') {
-        setError('Délai de connexion dépassé. Vérifiez votre connexion internet.');
-      } else if (error.response) {
-        switch (error.response.status) {
-          case 401:
-            setError('Email ou mot de passe incorrect');
-            break;
-          case 404:
-            setError('Serveur API non trouvé. Vérifiez que le backend est en marche.');
-            break;
-          case 500:
-            setError('Erreur serveur. Veuillez réessayer plus tard.');
-            break;
-          default:
-            setError(`Erreur ${error.response.status}: ${error.response.data?.message || 'Erreur de connexion'}`);
+
+      let errorMessage = 'Erreur lors de la connexion. Veuillez réessayer.';
+
+      if (error.response) {
+        console.error('📡 Réponse erreur:', error.response.data);
+        console.error('📡 Status:', error.response.status);
+
+        if (error.response.data) {
+          errorMessage = error.response.data.message ||
+            error.response.data.error ||
+            `Erreur ${error.response.status}`;
         }
-        console.error('Détails erreur:', error.response.data);
       } else if (error.request) {
-        setError('Pas de réponse du serveur. Vérifiez que le backend est en marche sur http://localhost:5000');
-        console.error('URL testée:', 'http://localhost:5000/api/auth/login');
-        console.error('Requête sans réponse:', error.request);
+        errorMessage = 'Pas de réponse du serveur. Vérifiez que le backend est en marche sur http://localhost:5000';
+        console.error('🌐 Pas de réponse:', error.request);
       } else {
-        setError('Erreur lors de la connexion. Veuillez réessayer.');
+        console.error('⚡ Erreur de configuration:', error.message);
       }
-      
+
+      setError(errorMessage);
       setLoading(false);
-    }
-  };
-
-  const handleSocialLogin = (provider) => {
-    setError(`Login avec ${provider} n'est pas encore implémenté. Veuillez utiliser l'email.`);
-  };
-
-  React.useEffect(() => {
-    const savedEmail = localStorage.getItem('rememberedEmail');
-    const savedRememberMe = localStorage.getItem('rememberMe');
-    
-    if (savedEmail && savedRememberMe === 'true') {
-      setFormData(prev => ({ ...prev, email: savedEmail }));
-      setRememberMe(true);
-    }
-    
-    // Vérifier le token actuel
-    const currentToken = localStorage.getItem('authToken');
-    if (currentToken) {
-      console.log('🔍 Token actuel dans localStorage:', currentToken.substring(0, 30) + '...');
-      console.log('📏 Longueur:', currentToken.length);
-      
-      // Nettoyer le token existant
-      const cleaned = cleanToken(currentToken);
-      if (cleaned && cleaned !== currentToken) {
-        console.log('🧹 Nettoyage du token existant...');
-        localStorage.setItem('authToken', cleaned);
-      }
-    }
-  }, []);
-
-  const testAPIConnection = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/health', {
-        timeout: 3000
-      });
-      console.log('✅ Serveur backend disponible:', response.data);
-      return true;
-    } catch (error) {
-      console.warn('❌ Serveur backend non disponible:', error.message);
-      return false;
     }
   };
 
   const handleDemoAccount = (accountType) => {
     let email, password;
-    
-    switch(accountType) {
+
+    switch (accountType) {
       case 'admin':
-        email = 'admin@nexus.com';
+        email = 'admin@gmail.com';
         password = 'admin123';
         break;
       case 'user':
-        email = 'john@nexus.com';
+        email = 'utilisateur@gmail.com';
         password = 'user123';
         break;
       default:
         email = 'test@test.com';
         password = 'test123';
     }
-    
+
     setFormData({ email, password });
     setSuccess(`Compte ${accountType} pré-rempli. Cliquez sur "Se connecter".`);
   };
 
-  // Fonction pour debug
-  const debugToken = () => {
-    const token = localStorage.getItem('authToken');
-    console.log('- Présent:', token ? 'OUI' : 'NON');
-    if (token) {
-      console.log('- Longueur:', token.length);
-      console.log('- Début:', token.substring(0, 30) + '...');
-      console.log('- Fin:', '...' + token.substring(token.length - 30));
-      console.log('- Contient "Bearer":', token.includes('Bearer'));
-      console.log('- Partes JWT:', token.split('.').length);
-      
-      // Essayer de décoder
-      try {
-        const parts = token.split('.');
-        if (parts.length === 3) {
-          const header = JSON.parse(atob(parts[0]));
-          const payload = JSON.parse(atob(parts[1]));
-          console.log('- Header:', header);
-          console.log('- Payload:', payload);
-        }
-      } catch (e) {
-        console.log('- Impossible de décoder:', e.message);
-      }
+  const testAPIConnection = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/health', {
+        timeout: 3000
+      });
+      console.log('✅ Serveur disponible:', response.data);
+      setSuccess('✅ Serveur backend disponible !');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (error) {
+      console.warn('❌ Serveur non disponible:', error.message);
+      setError('❌ Serveur backend non disponible. Vérifiez que le serveur est en marche.');
+    }
+  };
+
+  // Test direct de l'API login (pour debug)
+  const testLoginAPI = async () => {
+    try {
+      const testData = {
+        email: 'test@test.com',
+        password: 'test123'
+      };
+
+      console.log('🧪 Test API login avec:', testData);
+
+      const response = await axios.post('http://localhost:5000/api/auth/login', testData, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      console.log('🧪 Réponse test:', response.data);
+      alert('API test: ' + JSON.stringify(response.data, null, 2));
+    } catch (err) {
+      console.error('🧪 Erreur test:', err.response?.data || err.message);
+      alert('Erreur test: ' + (err.response?.data?.message || err.message));
     }
   };
 
@@ -299,28 +275,46 @@ const Login = ({ onLogin }) => {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-primary-300/20 to-secondary-300/20 rounded-full blur-3xl dark:from-primary-500/10 dark:to-secondary-500/10"></div>
         <div className="absolute bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-accent-300/20 to-primary-300/20 rounded-full blur-3xl dark:from-accent-500/10 dark:to-primary-500/10"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-secondary-300/10 to-accent-300/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative min-h-screen flex items-center justify-center p-4">
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          
+
           {/* Left Side - Hero Section */}
           <div className="hidden lg:block">
             <div className="relative">
-              {/* Animated Card */}
               <div className="relative bg-gradient-to-br from-white/80 to-white/20 dark:from-neutral-900/80 dark:to-neutral-900/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-neutral-800/50 overflow-hidden">
-                
                 <div className="relative z-10">
                   <div className="flex items-center space-x-3 mb-6">
                     <div className="h-14 w-14 rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg">
-                      <Sparkles className="h-7 w-7 text-white" />
+                      <Shield className="h-7 w-7 text-white" />
                     </div>
                     <div>
                       <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                        Welcome Back
+                        Bienvenue
                       </h1>
-                      <p className="text-neutral-600 dark:text-neutral-400">Sign in to your account</p>
+                      <p className="text-neutral-600 dark:text-neutral-400">Connectez-vous à votre compte</p>
+                    </div>
+                  </div>
+
+                  {/* Debug buttons */}
+                  <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl">
+                    <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+                      Debug
+                    </h3>
+                    <div className="space-y-2">
+                      <button
+                        onClick={testLoginAPI}
+                        className="w-full p-2 text-left rounded-lg bg-yellow-100 dark:bg-yellow-800/30 hover:bg-yellow-200 dark:hover:bg-yellow-700/30 transition-colors text-sm"
+                      >
+                        🧪 Tester l&apos;API Login
+                      </button>
+                      <button
+                        onClick={testAPIConnection}
+                        className="w-full p-2 text-left rounded-lg bg-blue-100 dark:bg-blue-800/30 hover:bg-blue-200 dark:hover:bg-blue-700/30 transition-colors text-sm"
+                      >
+                        🔗 Tester connexion API
+                      </button>
                     </div>
                   </div>
 
@@ -335,19 +329,18 @@ const Login = ({ onLogin }) => {
                         className="w-full p-3 text-left rounded-xl bg-gradient-to-r from-primary-500/10 to-secondary-500/10 hover:from-primary-500/20 hover:to-secondary-500/20 border border-primary-500/20 transition-all duration-300"
                       >
                         <div className="font-medium text-primary-600 dark:text-primary-400">Admin</div>
-                        <div className="text-sm text-neutral-600 dark:text-neutral-400">admin@gmail.com</div>
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400">admin@gmail.com / admin123</div>
                       </button>
                       <button
                         onClick={() => handleDemoAccount('user')}
                         className="w-full p-3 text-left rounded-xl bg-gradient-to-r from-accent-500/10 to-primary-500/10 hover:from-accent-500/20 hover:to-primary-500/20 border border-accent-500/20 transition-all duration-300"
                       >
                         <div className="font-medium text-accent-600 dark:text-accent-400">Utilisateur</div>
-                        <div className="text-sm text-neutral-600 dark:text-neutral-400">Utilisateur@gmail.com</div>
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400">utilisateur@gmail.com / user123</div>
                       </button>
                     </div>
                   </div>
 
-                  {/* Features List */}
                   <div className="space-y-6">
                     <div className="flex items-start space-x-4 group">
                       <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary-100 to-primary-50 dark:from-primary-900/30 dark:to-primary-800/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -366,10 +359,8 @@ const Login = ({ onLogin }) => {
 
           {/* Right Side - Login Form */}
           <div className="relative">
-            <div className={`relative bg-gradient-to-br from-white/90 to-white/70 dark:from-neutral-900/90 dark:to-neutral-900/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/30 dark:border-neutral-800/50 transition-all duration-500 ${hoverEffect ? 'scale-[1.02]' : ''}`}
-                 onMouseEnter={() => setHoverEffect(true)}
-                 onMouseLeave={() => setHoverEffect(false)}>
-              
+            <div className="relative bg-gradient-to-br from-white/90 to-white/70 dark:from-neutral-900/90 dark:to-neutral-900/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/30 dark:border-neutral-800/50 transition-all duration-500">
+
               <div className="relative z-10">
                 {/* Header */}
                 <div className="text-center mb-8">
@@ -384,7 +375,7 @@ const Login = ({ onLogin }) => {
                   </p>
                 </div>
 
-                {/* Display Success Message */}
+                {/* Messages */}
                 {success && (
                   <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-900/10 border border-green-200 dark:border-green-800/50">
                     <div className="flex items-start">
@@ -394,21 +385,18 @@ const Login = ({ onLogin }) => {
                   </div>
                 )}
 
-                {/* Display Error Message */}
                 {error && (
                   <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-red-50 to-red-100/50 dark:from-red-900/20 dark:to-red-900/10 border border-red-200 dark:border-red-800/50">
                     <div className="flex items-start">
                       <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0" />
                       <div>
                         <p className="text-sm text-red-700 dark:text-red-300 mb-2">{error}</p>
-                        {error.includes('backend') && (
-                          <button
-                            onClick={testAPIConnection}
-                            className="text-xs text-red-600 dark:text-red-400 hover:underline"
-                          >
-                            Tester la connexion au serveur
-                          </button>
-                        )}
+                        <button
+                          onClick={testAPIConnection}
+                          className="text-xs text-red-600 dark:text-red-400 hover:underline"
+                        >
+                          Tester la connexion au serveur
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -534,10 +522,6 @@ const Login = ({ onLogin }) => {
           </div>
         </div>
       </div>
-      {/* Floating Particles */}
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary-400 rounded-full animate-float"></div>
-      <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary-400 rounded-full animate-float animation-delay-1000"></div>
-      <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent-400 rounded-full animate-float animation-delay-2000"></div>
     </div>
   );
 };

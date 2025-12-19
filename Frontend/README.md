@@ -1,53 +1,280 @@
-# Getting Started with Create React App
+# Mpanolo-tsaina AI - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Assistant intelligent de littératie médiatique pour Madagascar - Vérifiez la fiabilité des contenus éducatifs avec l'IA.
 
-## Available Scripts
+## 🚀 Fonctionnalités
 
-In the project directory, you can run:
+### Core Features
+- ✅ **Vérification de contenu IA** - Analyse de fiabilité avec modèles spécialisés pour le contexte malgache
+- ✅ **Interface multilingue** - Support complet Malagasy/Français/Anglais
+- ✅ **Mode hors-ligne** - Cache intelligent et synchronisation en arrière-plan
+- ✅ **Dashboard complet** - Historique, statistiques, et gestion des vérifications
+- ✅ **Apprentissage intégré** - Modules de formation à la pensée critique
+- ✅ **Profil utilisateur** - Gestion des statistiques et progression d'apprentissage
+- ✅ **Administration** - Panel d'administration complet pour les gestionnaires
 
-### `npm start`
+### Technical Features
+- 🔄 **PWA (Progressive Web App)** - Installation et fonctionnement hors-ligne
+- 💾 **Cache intelligent** - IndexedDB + localForage pour performance optimale
+- 🔄 **Synchronisation** - Background Sync API pour synchronisation automatique
+- 📱 **Responsive** - Design mobile-first avec Tailwind CSS
+- 🎨 **Thème sombre/clair** - Support complet des thèmes
+- 🌐 **Multilingue** - Context API pour gestion des langues
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Technologies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React 19** - Framework frontend moderne
+- **Tailwind CSS** - Framework CSS utilitaire
+- **React Router** - Navigation client-side
+- **Axios** - Client HTTP avec intercepteurs
+- **React Hot Toast** - Notifications utilisateur
+- **Workbox** - Service Worker et stratégies de cache
+- **IndexedDB** - Base de données client-side
+- **localForage** - Wrapper localStorage amélioré
+- **Lucide React** - Icônes modernes
 
-## Environment variables
+## 📦 Installation
 
-If your backend server runs on a different host/port than `http://localhost:5000`, set the `REACT_APP_API_URL` environment variable before starting the frontend, e.g.:
+### Prérequis
+- Node.js 16+
+- npm ou yarn
+- Backend Mpanolo-tsaina API (voir dossier Backend)
 
+### Installation des dépendances
 ```bash
-# in fish shell
-set -x REACT_APP_API_URL http://localhost:5000
+cd Frontend
+npm install
+```
+
+### Variables d'environnement
+Créer un fichier `.env` dans le dossier Frontend :
+
+```env
+# URL de l'API backend
+REACT_APP_API_URL=http://localhost:3000/api
+
+# Configuration PWA
+REACT_APP_PWA_ENABLED=true
+
+# Clé Google Analytics (optionnel)
+REACT_APP_GA_TRACKING_ID=
+
+# Configuration de développement
+REACT_APP_ENV=development
+```
+
+### Démarrage en développement
+```bash
 npm start
 ```
 
-This ensures API calls (e.g. the contact form) are correctly targeted to the backend.
+L'application sera disponible sur [http://localhost:3000](http://localhost:3000)
 
-### `npm test`
+### Build de production
+```bash
+npm run build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tests
+```bash
+npm test
+```
 
-### `npm run build`
+## 🏗️ Architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Structure des dossiers
+```
+Frontend/
+├── public/
+│   ├── manifest.json          # Configuration PWA
+│   ├── sw.js                  # Service Worker
+│   └── assets/                # Images et ressources statiques
+├── src/
+│   ├── components/            # Composants React
+│   │   ├── CheckDashboard.js  # Dashboard principal
+│   │   ├── UserProfile.js     # Profil utilisateur
+│   │   ├── AdminDashboard.js  # Panel administration
+│   │   └── ...
+│   ├── contexts/              # Context API
+│   │   └── LanguageContext.js # Gestion multilingue
+│   ├── hooks/                 # Hooks personnalisés
+│   │   ├── useAuth.js         # Authentification
+│   │   └── useMessages.js     # Messages
+│   ├── services/              # Services et API
+│   │   ├── api.js             # Client API principal
+│   │   └── offlineCache.js    # Cache hors-ligne
+│   └── utils/                 # Utilitaires
+├── package.json
+└── README.md
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Stratégies de cache
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Service Worker (Workbox)
+- **Static Resources**: Cache-First (24h)
+- **Pages HTML**: Network-First (1h)
+- **API Calls**: Stale-While-Revalidate (30min)
+- **External Images**: Cache-First (7j)
 
-### `npm run eject`
+#### IndexedDB
+- **Vérifications hors-ligne**: Stockage persistant
+- **Historique**: Cache avec expiration
+- **Modules d'apprentissage**: Synchronisation sélective
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### localForage
+- **Préférences utilisateur**: Cache permanent
+- **État UI**: Cache temporaire
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🌐 Internationalisation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Langues supportées
+- **Malagasy (mg)** - Langue principale
+- **Français (fr)** - Langue administrative
+- **Anglais (en)** - Langue technique
+
+### Ajout d'une nouvelle langue
+1. Ajouter les traductions dans `src/contexts/LanguageContext.js`
+2. Mettre à jour le manifest.json
+3. Tester l'interface dans la nouvelle langue
+
+## 📱 PWA Features
+
+### Installation
+L'application peut être installée comme une PWA native sur :
+- Android (Chrome)
+- iOS (Safari)
+- Windows (Edge/Chrome)
+- macOS (Safari)
+
+### Mode hors-ligne
+- Vérifications basiques sans connexion
+- Cache des modules d'apprentissage
+- Synchronisation automatique à la reconnexion
+
+### Service Worker
+- Mise à jour automatique en arrière-plan
+- Gestion des erreurs réseau
+- Cache intelligent des ressources
+
+## 🔧 API Integration
+
+### Endpoints principaux
+```javascript
+// Vérification de contenu
+POST /api/check
+
+// Gestion utilisateurs
+GET /api/auth/profile
+PUT /api/auth/profile
+
+// Modules d'apprentissage
+GET /api/learning/modules
+POST /api/learning/modules/{id}/complete
+
+// Administration
+GET /api/admin/users
+GET /api/admin/checks
+```
+
+### Gestion d'erreur
+- Intercepteurs Axios pour authentification
+- Retry automatique pour les erreurs réseau
+- Fallback vers cache hors-ligne
+
+## 🎨 UI/UX Design
+
+### Principes
+- **Mobile-first** - Design responsive
+- **Accessible** - Conformité WCAG 2.1
+- **Intuitif** - Navigation simple et claire
+- **Contextualisé** - Adapté au contexte malgache
+
+### Composants clés
+- **CheckDashboard** - Interface principale de vérification
+- **UserProfile** - Gestion du profil et statistiques
+- **AdminDashboard** - Panel d'administration
+- **LanguageProvider** - Gestion multilingue
+
+## 🚀 Déploiement
+
+### Build optimisé
+```bash
+npm run build
+```
+
+### Variables de production
+```env
+REACT_APP_API_URL=https://api.mpanolotsaina.mg
+REACT_APP_ENV=production
+REACT_APP_PWA_ENABLED=true
+```
+
+### Serveur recommandé
+- Nginx avec configuration PWA
+- HTTPS obligatoire pour Service Worker
+- Compression GZIP activée
+
+## 🧪 Tests
+
+### Tests unitaires
+```bash
+npm test
+```
+
+### Tests d'intégration
+```bash
+npm run test:integration
+```
+
+### Tests E2E (Cypress)
+```bash
+npm run test:e2e
+```
+
+## 📊 Monitoring
+
+### Métriques collectées
+- Performance PWA
+- Taux de conversion
+- Utilisation hors-ligne
+- Erreurs JavaScript
+
+### Outils
+- Google Analytics
+- Sentry (erreurs)
+- Performance monitoring
+
+## 🤝 Contribution
+
+### Processus
+1. Fork le projet
+2. Créer une branche feature
+3. Commits atomiques
+4. Pull Request avec description
+
+### Standards de code
+- ESLint configuration
+- Prettier pour formatage
+- Tests obligatoires
+- Documentation JSDoc
+
+## 📄 Licence
+
+Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
+
+## 👥 Équipe
+
+Développé avec ❤️ pour Madagascar par l'équipe Mpanolo-tsaina AI.
+
+## 📞 Support
+
+- 📧 Email: support@mpanolotsaina.mg
+- 📱 Discord: [Lien Discord]
+- 🐛 Issues: [GitHub Issues]
+
+---
+
+**Mpanolo-tsaina AI** - Pour une information fiable à Madagascar 🇲🇬
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 

@@ -1,6 +1,8 @@
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
+
+RUN apk add --no-cache python3 make g++
 
 COPY package*.json ./
 
@@ -8,13 +10,8 @@ RUN npm ci --only=production
 
 COPY . .
 
-# Créer l'utilisateur non-root
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001 && \
-    chown -R nodejs:nodejs /app
+RUN mkdir -p uploads
 
-USER nodejs
+EXPOSE 5000
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npm run migrate && npm start"]

@@ -3,13 +3,24 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
-// Routes publiques
-router.post('/register', authController.register);
-router.post('/login', authController.login);
+// @route   POST /api/auth/register
+// @desc    Register user
+// @access  Public
+router.post('/register', authController.registerValidation, authController.register);
 
-// Routes protégées
+// @route   POST /api/auth/login
+// @desc    Login user
+// @access  Public
+router.post('/login', authController.loginValidation, authController.login);
+
+// @route   GET /api/auth/profile
+// @desc    Get current user profile
+// @access  Private
 router.get('/profile', protect, authController.getProfile);
+
+// @route   PUT /api/auth/profile
+// @desc    Update user profile
+// @access  Private
 router.put('/profile', protect, authController.updateProfile);
-router.post('/logout', protect, authController.logout);
 
 module.exports = router;

@@ -1,10 +1,16 @@
-// LanguageContext.jsx
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect
+} from 'react';
 
-// Traductions COMPLÈTES de l'application (mis à jour avec les nouvelles clés)
+/* ================================
+   TRADUCTIONS DE L’APPLICATION
+================================ */
 const translations = {
   mg: {
-    // Navigation
+    /* Navigation */
     home: 'Fandraisana',
     check: 'Hamarinina',
     learn: 'Fianarana',
@@ -16,71 +22,105 @@ const translations = {
     profile: 'Profil',
     dashboard: 'Tabilao',
     language: 'Fiteny',
-    theme: 'Teny',
+    theme: 'Endrika',
     light: 'Mazava',
     dark: 'Maizina',
     system: 'Rafitra',
     welcome: 'Tonga soa',
     getStarted: 'Atombohy',
-    search_placeholder: 'Hikaroka vaovao, fanabeazana, sns...',
-    popular_searches: 'Hikaroka malaza',
     notifications: 'Fampandrenesana',
+    menu: 'Saka',
+    app_subtitle: 'Mpanolo-tsaina AI - Mpiara-miaina amin\'ny fandinihana ny vaovao',
+    malagasy: 'Malagasy',
+    french: 'Français',
+    english: 'English',
+    light_mode: 'Mode mazava',
+    dark_mode: 'Mode maizina',
+    auto_detect: 'Fanamarinana ho azy',
+    toggle_theme: 'Hanova endrika',
+    footer_tagline: 'Fiarovana amin\'ny diso fampahalalam-baovao',
+    footer_description: 'Solon\'aina manampy ny mpianatra sy ny rehetra hanara-maso ny fahamarinan\'ny vaovao an-tserasera eto Madagasikara.',
+    footer_links: 'Rohy',
+    footer_services: 'Fanompoana',
+    footer_learn: 'Fianarana',
+    footer_about: 'Momba anay',
+    footer_contact: 'Fifandraisana',
+    footer_privacy: 'Tsiambaratelo',
+    footer_terms: 'Fepetra',
+    footer_rights: 'Zo rehetra voaaro',
+    footer_check_news: 'Hamarinina ny vaovao',
+    footer_education: 'Fampianarana',
+    footer_analytics: 'Vakisan-kevitra',
+    footer_alerts: 'Famohazana',
+    footer_resources: 'Loharanom-baovao',
+    footer_trusted_sources: 'Loharanom-baovao azo itokiana',
+    footer_privacy_policy: 'Politika fiarovana ny tsiambaratelo',
+    footer_terms_of_use: 'Fepetra fampiasana',
+    footer_about_us: 'Momba anay',
+    footer_help: 'Hanampy',
+    footer_supported_by: 'Anarana fanohanana:',
+    footer_share_alert_title: 'Mpanolo-tsaina mialoha ny fizarana',
+    footer_share_alert_desc: 'Asehovan\'ny AI alohan\'ny hizaranao ny hafatra',
+    footer_chat_question: 'Fanontaniana amin\'ny Mpanolo-tsaina AI?',
 
-    // Page Home spécifique
-    heroTitle: 'Mpanolo-tsaina AI: Mpiara-miaina amin\'ny fandinihana ny vaovao',
-    heroSubtitle: 'Rindran\'ASA AI mpanampy amin\'ny fanadiniana ny fahamarinan\'ny vaovao an-tserasera ao Madagasikara',
-    checkPlaceholder: 'Ampidiro ny lahatsoratra, sary na rohy hohamarinina...',
+    /* Home */
+    heroTitle: 'Mpanolo-tsaina AI: Mpiara-miaina amin’ny fandinihana ny vaovao',
+    heroTitleLine1: 'Défiez les',
+    heroTitleLine2: 'Fake News Malagasy',
+    heroTitleLine3: 'avec l\'intelligence artificielle locale',
+    heroSubtitle:
+      'IA manampy amin\'ny fanamarinana ny fahamarinan\'ny vaovao an-tserasera eto Madagasikara',
+    heroDescription: 'Mpanolo-tsaina AI est votre assistant intelligent pour vérifier la fiabilité des informations virales à Madagascar. Développez votre esprit critique grâce à notre plateforme éducative.',    analyzingText: 'Eo am-pandefasana...',
+    analyzeButton: 'Hamakafaka amin\'ny IA',
+    demoButton: 'Jereo ohatra',    checkPlaceholder:
+      'Ampidiro ny lahatsoratra, sary na rohy hohamarinina...',
     checkButton: 'Hamarinina',
     featuresTitle: 'Toetra manokana',
-    forStudents: 'Ho an\'ny mpianatra',
-    forTeachers: 'Ho an\'ny mpampianatra',
-    forResearchers: 'Ho an\'ny mpikaroka',
-    howItWorks: 'Ahoana no fiasany?',
-    statsTitle: 'Statistika',
-    learningTitle: 'Fianarana',
-    demoTitle: 'Ohatra amin\'ny asa',
-    ctaTitle: 'Atombohy ny fiarovana ny fahalalanao',
-    ctaSubtitle: 'Miaraha aminay amin\'ny fananganana firenena iray manana fahalalana marina',
+    stepsTitle: '4 dingana hanjaka amin\'ny fanamarinana vaovao',
+    ctaTitle: 'Midira amin\'ny fihetsiketsehana amin\'ny tsy fahamarinana',
+    ctaDescription: 'An-jatony ny mpianatra malagasy mampiasa Mpanolo-tsaina AI hanatsarana ny sainy. Ianao no manaraka!',
+    startFreeButton: 'Atombohy maimaimpoana',
 
-    // Page CheckContent
-    verifyTitle: 'Hamarinina ny vaovao',
-    pasteContent: 'Apetaho eto ny lahatsoratra na rohy...',
-    analyzeButton: 'Hamarinina amin\'ny AI',
-    uploadImage: 'Alefaso sary',
-    recentChecks: 'Fanadiniana farany',
-    reliabilityScore: 'Mari-pahamarinana',
-    detailedReport: 'Tati-panadihadiana',
-
-    // Page Learn
-    modulesTitle: 'Fianarana momba ny fandinihana ny vaovao',
-    myProgress: 'Fivoarana',
-    startModule: 'Atombohy ity mody',
-    completed: 'Vita',
-    certificate: 'Taraty fanamarinana',
-
-    // Page About
-    missionTitle: 'Ny tanjonay',
-    teamTitle: 'Ny ekipa',
-    contactTitle: 'Fifandraisana',
-    impactTitle: 'Vokatra',
-
-    // Dictionnaire commun
+    /* AI Check */
+    ai_fact_check: 'Fandinihana ny fahamarinan’ny vaovao amin’ny IA',
+    ai_check_description:
+      'Apetaho eto ny lahatsoratra na hafatra rehetra hojerena amin’ny IA manokana ho an’ny tontolo malagasy.',
+    analyze_with_ai: 'Hamakafaka amin’ny IA',
+    analysis_result: 'Vokatry ny famakafakana',
+    reliability_score: 'Mariky ny fahamarinan’ny vaovao',
+    risk_level: 'Ambaratongam-pandrahonana',
+    summary: 'Famintinana',
+    biases_detected: 'Fironana hita',
+    sources_to_check: 'Loharano tokony hojerena',    enterContent: 'Ampidiro ny votoaty hohamarinina',
+    characters: 'litera',
+    contentPlaceholder: 'Apetraho eto ny lahatsoratra hohamarinina...',
+    contentTooShort: 'Ny votoaty tsy maintsy misy litera 10 farafahakeliny',
+    analyzing: 'Eo am-pandefasana...',
+    shareWarningTitle: 'Tandremo: Fahamarinana ambany',
+    lowReliabilityWarning: 'Ity vaovao ity dia misy loza',
+    detectedIssues: 'Olana hita:',
+    shareAnyway: 'Zarazara na dia izany aza',
+    reliable: 'Azo itokisana',
+    unreliable: 'Tsy azo itokisana',
+    uncertain: 'Tsy azo antoka',
+    /* Commun */
     loading: 'Eo am-pandefasana...',
     error: 'Nisy olana',
     success: 'Nahomby',
     save: 'Tehirizo',
     cancel: 'Avelao',
-    confirm: 'Eny',
+    confirm: 'Hamarino',
     delete: 'Fafao',
     edit: 'Ahitsio',
     view: 'Hijery',
     share: 'Zarazarao',
-    download: 'Aliso',
-    moreInfo: 'Fampahalalana fanampiny',
+    download: 'Alaina',
     close: 'Akatony'
   },
+
+
   fr: {
-    // Navigation
+    /* Navigation */
     home: 'Accueil',
     check: 'Vérifier',
     learn: 'Apprendre',
@@ -98,49 +138,83 @@ const translations = {
     system: 'Système',
     welcome: 'Bienvenue',
     getStarted: 'Commencer',
-    search_placeholder: 'Rechercher une info, un cours, etc...',
-    popular_searches: 'Recherches populaires',
     notifications: 'Notifications',
+    menu: 'Menu',
+    app_subtitle: 'Mpanolo-tsaina AI - Assistant en littératie médiatique',
+    malagasy: 'Malgache',
+    french: 'Français',
+    english: 'Anglais',
+    light_mode: 'Mode clair',
+    dark_mode: 'Mode sombre',
+    auto_detect: 'Détection automatique',
+    toggle_theme: 'Changer de thème',
+    footer_tagline: 'Protection contre la désinformation',
+    footer_description: 'Solution IA qui aide les étudiants et tous à surveiller la fiabilité des informations en ligne à Madagascar.',
+    footer_links: 'Liens',
+    footer_services: 'Services',
+    footer_learn: 'Apprendre',
+    footer_about: 'À propos',
+    footer_contact: 'Contact',
+    footer_privacy: 'Confidentialité',
+    footer_terms: 'Conditions',
+    footer_rights: 'Tous droits réservés',
+    footer_check_news: 'Vérifier les nouvelles',
+    footer_education: 'Éducation',
+    footer_analytics: 'Analyses',
+    footer_alerts: 'Alertes',
+    footer_resources: 'Ressources',
+    footer_trusted_sources: 'Sources fiables',
+    footer_privacy_policy: 'Politique de confidentialité',
+    footer_terms_of_use: 'Conditions d\'utilisation',
+    footer_about_us: 'À propos de nous',
+    footer_help: 'Aide',
+    footer_supported_by: 'Soutenu par :',
+    footer_share_alert_title: 'Mpanolo-tsaina prévient avant partage',
+    footer_share_alert_desc: 'Alerte IA avant de partager votre message',
+    footer_chat_question: 'Question à Mpanolo-tsaina AI ?',
 
-    // Page Home spécifique
+    /* Home */
     heroTitle: 'Mpanolo-tsaina AI : Votre assistant en littératie médiatique',
-    heroSubtitle: 'Une IA qui vous aide à vérifier la fiabilité des contenus en ligne à Madagascar',
+    heroTitleLine1: 'Défiez les',
+    heroTitleLine2: 'Fake News Malgasy',
+    heroTitleLine3: 'avec l\'intelligence artificielle locale',
+    heroSubtitle: 'Une IA pour vérifier la fiabilité des contenus en ligne à Madagascar',
+    heroDescription: 'Mpanolo-tsaina AI est votre assistant intelligent pour vérifier la fiabilité des informations virales à Madagascar. Développez votre esprit critique grâce à notre plateforme éducative.',
+    analyzingText: 'Analyse en cours...',
+    analyzeButton: 'Analyser avec l\'IA',
+    demoButton: 'Voir un exemple',
     checkPlaceholder: 'Collez le texte, image ou lien à vérifier...',
     checkButton: 'Vérifier',
     featuresTitle: 'Fonctionnalités',
-    forStudents: 'Pour les étudiants',
-    forTeachers: 'Pour les enseignants',
-    forResearchers: 'Pour les chercheurs',
-    howItWorks: 'Comment ça marche ?',
-    statsTitle: 'Statistiques',
-    learningTitle: 'Apprentissage',
-    demoTitle: 'Démonstration',
-    ctaTitle: 'Protégez vos connaissances dès maintenant',
-    ctaSubtitle: 'Rejoignez-nous pour bâtir une nation mieux informée',
+    stepsTitle: '4 étapes pour devenir un expert en vérification d\'informations',
+    ctaTitle: 'Rejoignez le mouvement contre la désinformation',
+    ctaDescription: 'Des milliers d\'étudiants malgaches utilisent déjà Mpanolo-tsaina AI pour développer leur esprit critique. Soyez le prochain !',
+    startFreeButton: 'Commencer gratuitement',
 
-    // Page CheckContent
-    verifyTitle: 'Vérifier une information',
-    pasteContent: 'Collez le texte ou le lien ici...',
-    analyzeButton: 'Analyser avec l\'IA',
-    uploadImage: 'Télécharger une image',
-    recentChecks: 'Vérifications récentes',
-    reliabilityScore: 'Score de fiabilité',
-    detailedReport: 'Rapport détaillé',
+    /* AI Check */
+    ai_fact_check: 'Vérification des faits par IA',
+    ai_check_description: 'Collez un texte ou message pour analyser sa fiabilité avec notre IA spécialisée.',
+    analyze_with_ai: 'Analyser avec l\'IA',
+    analysis_result: 'Résultat de l\'analyse',
+    reliability_score: 'Score de fiabilité',
+    risk_level: 'Niveau de risque',
+    summary: 'Résumé',
+    biases_detected: 'Biais détectés',
+    sources_to_check: 'Sources à vérifier',
+    enterContent: 'Saisissez le contenu à vérifier',
+    characters: 'caractères',
+    contentPlaceholder: 'Collez ici le texte à analyser...',
+    contentTooShort: 'Le contenu doit contenir au moins 10 caractères',
+    analyzing: 'Analyse IA en cours...',
+    shareWarningTitle: 'Attention : Fiabilité faible',
+    lowReliabilityWarning: 'Cette information présente des risques',
+    detectedIssues: 'Problèmes détectés :',
+    shareAnyway: 'Partager quand même',
+    reliable: 'Fiable',
+    unreliable: 'Non fiable',
+    uncertain: 'Incertain',
 
-    // Page Learn
-    modulesTitle: 'Apprendre la vérification d\'informations',
-    myProgress: 'Ma progression',
-    startModule: 'Commencer ce module',
-    completed: 'Terminé',
-    certificate: 'Certificat',
-
-    // Page About
-    missionTitle: 'Notre mission',
-    teamTitle: 'Notre équipe',
-    contactTitle: 'Contact',
-    impactTitle: 'Impact',
-
-    // Dictionnaire commun
+    /* Commun */
     loading: 'Chargement...',
     error: 'Erreur',
     success: 'Succès',
@@ -152,11 +226,74 @@ const translations = {
     view: 'Voir',
     share: 'Partager',
     download: 'Télécharger',
-    moreInfo: 'Plus d\'infos',
-    close: 'Fermer'
+    close: 'Fermer',
+
+    /* About Page */
+    about_title: 'À propos',
+    about_subtitle: 'Mpanolo-tsaina AI',
+    about_description: 'Notre mission est de combattre la désinformation et de promouvoir la littératie médiatique à travers une intelligence artificielle dédiée à la vérification des faits.',
+    about_stats_verified: 'Contenus Vérifiés',
+    about_stats_accuracy: 'Précision d\'Analyse',
+    about_stats_sources: 'Sources Fiables',
+    about_stats_availability: 'Disponibilité',
+    about_mission_title: 'Notre Mission',
+    about_mission_highlight: 'Mission',
+    about_mission_text1: 'Dans un monde où l\'information circule à vitesse grand V, il devient crucial de disposer d\'outils fiables pour distinguer le vrai du faux. Mpanolo-tsaina AI ("Assistant Intelligent" en malgache) a été créé pour répondre à ce besoin urgent.',
+    about_mission_text2: 'Nous croyons que l\'accès à une information vérifiée est un droit fondamental. Notre plateforme utilise des technologies d\'intelligence artificielle avancées pour analyser, vérifier et noter la fiabilité des contenus en ligne.',
+    about_literacy_title: 'Littératie Médiatique',
+    about_literacy_text: 'Nous éduquons les utilisateurs à développer leur esprit critique et à mieux comprendre les mécanismes de l\'information numérique.',
+    about_features_title: 'Nos Fonctionnalités',
+    about_features_highlight: 'Fonctionnalités',
+    about_features_description: 'Découvrez les technologies innovantes qui font de Mpanolo-tsaina AI l\'outil de référence pour la vérification des informations.',
+    about_feature_ai: 'Intelligence Artificielle Avancée',
+    about_feature_ai_desc: 'Utilisation de modèles d\'IA pour analyser et vérifier l\'authenticité des contenus en ligne',
+    about_feature_protection: 'Protection contre la Désinformation',
+    about_feature_protection_desc: 'Système de détection des fake news et contenus trompeurs',
+    about_feature_multilingual: 'Support Multilingue',
+    about_feature_multilingual_desc: 'Analyse des contenus en Malagasy, Français et Anglais',
+    about_feature_community: 'Communauté Engagée',
+    about_feature_community_desc: 'Réseau d\'utilisateurs contribuant à la vérification collective',
+    about_feature_speed: 'Analyse Rapide',
+    about_feature_speed_desc: 'Vérification en temps réel des contenus partagés',
+    about_feature_reliability: 'Fiabilité Élevée',
+    about_feature_reliability_desc: 'Algorithmes éprouvés avec un taux de précision élevé',
+    about_team_title: 'Notre Équipe',
+    about_team_highlight: 'Équipe',
+    about_team_description: 'Une équipe passionnée et multidisciplinaire au service de la vérité numérique.',
+    about_team_member1_name: 'Rakoto Andriana',
+    about_team_member1_role: 'Expert IA & Fact-Checking',
+    about_team_member1_bio: 'Spécialiste en analyse des médias avec 10 ans d\'expérience',
+    about_team_member1_bio_mg: 'Spécialiste en analyse des médias avec 10 ans d\'expérience',
+    about_team_member2_name: 'Rasoa Nomena',
+    about_team_member2_role: 'Linguiste Computational',
+    about_team_member2_bio: 'Expert en traitement automatique des langues malgache',
+    about_team_member2_bio_mg: 'Expert en traitement automatique des langues malgache',
+    about_team_member3_name: 'Jean Dupont',
+    about_team_member3_role: 'Développeur Full-Stack',
+    about_team_member3_bio: 'Architecte de la plateforme Mpanolo-tsaina AI',
+    about_team_member3_bio_mg: 'Architecte de la plateforme Mpanolo-tsaina AI',
+    about_team_member4_name: 'Sarah Rabe',
+    about_team_member4_role: 'Designer UX/UI',
+    about_team_member4_bio: 'Créatrice de l\'expérience utilisateur intuitive',
+    about_team_member4_bio_mg: 'Créatrice de l\'expérience utilisateur intuitive',
+    about_cta_title: 'Rejoignez la lutte contre la désinformation',
+    about_cta_description: 'Ensemble, créons un écosystème numérique plus sain et plus fiable.',
+    about_cta_start: 'Commencer la Vérification',
+    about_cta_learn_more: 'En Savoir Plus',
+    about_footer_made_with: 'Fabriqué avec passion à Madagascar',
+    about_footer_copyright: '© {year} Mpanolo-tsaina AI. Tous droits réservés. Nous nous engageons à respecter la vie privée et à promouvoir une information éthique.',
+
+    /* Profile Page */
+    profile_title: 'Mon Profil',
+    profile_user_type: 'Type d\'utilisateur',
+    profile_language_preference: 'Langue préférée',
+    profile_citizen: 'Citoyen',
+    profile_moderator: 'Modérateur',
+    profile_admin: 'Administrateur'
   },
+
   en: {
-    // Navigation
+    /* Navigation */
     home: 'Home',
     check: 'Check',
     learn: 'Learn',
@@ -174,49 +311,85 @@ const translations = {
     system: 'System',
     welcome: 'Welcome',
     getStarted: 'Get Started',
-    search_placeholder: 'Search for news, courses, etc...',
-    popular_searches: 'Popular searches',
     notifications: 'Notifications',
+    menu: 'Menu',
+    app_subtitle: 'Mpanolo-tsaina AI - Media Literacy Assistant',
+    malagasy: 'Malagasy',
+    french: 'French',
+    english: 'English',
+    light_mode: 'Light mode',
+    dark_mode: 'Dark mode',
+    auto_detect: 'Auto-detect',
+    toggle_theme: 'Toggle theme',
+    footer_tagline: 'Protection against disinformation',
+    footer_description: 'AI solution that helps students and everyone monitor the reliability of online information in Madagascar.',
+    footer_links: 'Links',
+    footer_services: 'Services',
+    footer_learn: 'Learn',
+    footer_about: 'About',
+    footer_contact: 'Contact',
+    footer_privacy: 'Privacy',
+    footer_terms: 'Terms',
+    footer_rights: 'All rights reserved',
+    footer_check_news: 'Check news',
+    footer_education: 'Education',
+    footer_analytics: 'Analytics',
+    footer_alerts: 'Alerts',
+    footer_resources: 'Resources',
+    footer_trusted_sources: 'Trusted sources',
+    footer_privacy_policy: 'Privacy Policy',
+    footer_terms_of_use: 'Terms of Use',
+    footer_about_us: 'About Us',
+    footer_help: 'Help',
+    footer_supported_by: 'Supported by:',
+    footer_share_alert_title: 'Mpanolo-tsaina warns before sharing',
+    footer_share_alert_desc: 'AI alert before sharing your message',
+    footer_chat_question: 'Question to Mpanolo-tsaina AI?',
 
-    // Page Home spécifique
-    heroTitle: 'Mpanolo-tsaina AI: Your Media Literacy Assistant',
-    heroSubtitle: 'An AI that helps verify online content reliability in Madagascar',
-    checkPlaceholder: 'Paste text, image or link to check...',
-    checkButton: 'Check Now',
-    featuresTitle: 'Features',
-    forStudents: 'For Students',
-    forTeachers: 'For Teachers',
-    forResearchers: 'For Researchers',
-    howItWorks: 'How It Works',
-    statsTitle: 'Statistics',
-    learningTitle: 'Learning',
-    demoTitle: 'Demo',
-    ctaTitle: 'Protect Your Knowledge Now',
-    ctaSubtitle: 'Join us in building a better-informed nation',
-
-    // Page CheckContent
-    verifyTitle: 'Verify Information',
-    pasteContent: 'Paste text or link here...',
+    /* Home */
+    heroTitle: 'Mpanolo-tsaina AI: Media Literacy Assistant',
+    heroTitleLine1: 'Challenge the',
+    heroTitleLine2: 'Malagasy Fake News',
+    heroTitleLine3: 'with local artificial intelligence',
+    heroSubtitle:
+      'An AI that verifies online content reliability in Madagascar',
+    heroDescription: 'Mpanolo-tsaina AI is your intelligent assistant to verify the reliability of viral information in Madagascar. Develop your critical thinking thanks to our educational platform.',
+    analyzingText: 'Analyzing...',
     analyzeButton: 'Analyze with AI',
-    uploadImage: 'Upload Image',
-    recentChecks: 'Recent Checks',
-    reliabilityScore: 'Reliability Score',
-    detailedReport: 'Detailed Report',
+    demoButton: 'See example',
+    checkPlaceholder: 'Paste text, image or link to check...',
+    checkButton: 'Check',
+    featuresTitle: 'Features',
+    stepsTitle: '4 steps to become an expert in information verification',
+    ctaTitle: 'Join the movement against disinformation',
+    ctaDescription: 'Thousands of Malagasy students already use Mpanolo-tsaina AI to develop their critical thinking. Be the next one!',
+    startFreeButton: 'Start for free',
 
-    // Page Learn
-    modulesTitle: 'Learn Fact-Checking',
-    myProgress: 'My Progress',
-    startModule: 'Start This Module',
-    completed: 'Completed',
-    certificate: 'Certificate',
+    /* AI Check */
+    ai_fact_check: 'AI Fact Checking',
+    ai_check_description:
+      'Paste any text or message to analyze its reliability.',
+    analyze_with_ai: 'Analyze with AI',
+    analysis_result: 'Analysis Result',
+    reliability_score: 'Reliability Score',
+    risk_level: 'Risk Level',
+    summary: 'Summary',
+    biases_detected: 'Biases Detected',
+    sources_to_check: 'Sources to Check',
+    enterContent: 'Enter content to check',
+    characters: 'characters',
+    contentPlaceholder: 'Paste text to analyze here...',
+    contentTooShort: 'Content must contain at least 10 characters',
+    analyzing: 'AI Analysis in progress...',
+    shareWarningTitle: 'Warning: Low reliability',
+    lowReliabilityWarning: 'This information carries risks',
+    detectedIssues: 'Detected issues:',
+    shareAnyway: 'Share anyway',
+    reliable: 'Reliable',
+    unreliable: 'Unreliable',
+    uncertain: 'Uncertain',
 
-    // Page About
-    missionTitle: 'Our Mission',
-    teamTitle: 'Our Team',
-    contactTitle: 'Contact',
-    impactTitle: 'Impact',
-
-    // Dictionnaire commun
+    /* Commun */
     loading: 'Loading...',
     error: 'Error',
     success: 'Success',
@@ -228,54 +401,113 @@ const translations = {
     view: 'View',
     share: 'Share',
     download: 'Download',
-    moreInfo: 'More Info',
-    close: 'Close'
+    close: 'Close',
+
+    /* About Page */
+    about_title: 'About',
+    about_subtitle: 'Mpanolo-tsaina AI',
+    about_description: 'Our mission is to combat disinformation and promote media literacy through artificial intelligence dedicated to fact-checking.',
+    about_stats_verified: 'Contents Verified',
+    about_stats_accuracy: 'Analysis Accuracy',
+    about_stats_sources: 'Reliable Sources',
+    about_stats_availability: 'Availability',
+    about_mission_title: 'Our Mission',
+    about_mission_highlight: 'Mission',
+    about_mission_text1: 'In a world where information travels at lightning speed, it becomes crucial to have reliable tools to distinguish truth from falsehood. Mpanolo-tsaina AI ("Intelligent Assistant" in Malagasy) was created to meet this urgent need.',
+    about_mission_text2: 'We believe that access to verified information is a fundamental right. Our platform uses advanced artificial intelligence technologies to analyze, verify and rate the reliability of online content.',
+    about_literacy_title: 'Media Literacy',
+    about_literacy_text: 'We educate users to develop their critical thinking and better understand the mechanisms of digital information.',
+    about_features_title: 'Our Features',
+    about_features_highlight: 'Features',
+    about_features_description: 'Discover the innovative technologies that make Mpanolo-tsaina AI the reference tool for information verification.',
+    about_feature_ai: 'Advanced Artificial Intelligence',
+    about_feature_ai_desc: 'Use of AI models to analyze and verify the authenticity of online content',
+    about_feature_protection: 'Protection against Disinformation',
+    about_feature_protection_desc: 'System for detecting fake news and misleading content',
+    about_feature_multilingual: 'Multilingual Support',
+    about_feature_multilingual_desc: 'Analysis of content in Malagasy, French and English',
+    about_feature_community: 'Engaged Community',
+    about_feature_community_desc: 'Network of users contributing to collective verification',
+    about_feature_speed: 'Fast Analysis',
+    about_feature_speed_desc: 'Real-time verification of shared content',
+    about_feature_reliability: 'High Reliability',
+    about_feature_reliability_desc: 'Proven algorithms with high accuracy rate',
+    about_team_title: 'Our Team',
+    about_team_highlight: 'Team',
+    about_team_description: 'A passionate and multidisciplinary team at the service of digital truth.',
+    about_team_member1_name: 'Rakoto Andriana',
+    about_team_member1_role: 'AI & Fact-Checking Expert',
+    about_team_member1_bio: 'Media analysis specialist with 10 years of experience',
+    about_team_member1_bio_mg: 'Spécialiste en analyse des médias avec 10 ans d\'expérience',
+    about_team_member2_name: 'Rasoa Nomena',
+    about_team_member2_role: 'Computational Linguist',
+    about_team_member2_bio: 'Expert in automatic processing of Malagasy language',
+    about_team_member2_bio_mg: 'Expert en traitement automatique des langues malgache',
+    about_team_member3_name: 'Jean Dupont',
+    about_team_member3_role: 'Full-Stack Developer',
+    about_team_member3_bio: 'Architect of the Mpanolo-tsaina AI platform',
+    about_team_member3_bio_mg: 'Architecte de la plateforme Mpanolo-tsaina AI',
+    about_team_member4_name: 'Sarah Rabe',
+    about_team_member4_role: 'UX/UI Designer',
+    about_team_member4_bio: 'Creator of the intuitive user experience',
+    about_team_member4_bio_mg: 'Créatrice de l\'expérience utilisateur intuitive',
+    about_cta_title: 'Join the fight against disinformation',
+    about_cta_description: 'Together, let\'s create a healthier and more reliable digital ecosystem.',
+    about_cta_start: 'Start Verification',
+    about_cta_learn_more: 'Learn More',
+    about_footer_made_with: 'Made with passion in Madagascar',
+    about_footer_copyright: '© {year} Mpanolo-tsaina AI. All rights reserved. We are committed to respecting privacy and promoting ethical information.',
+
+    /* Profile Page */
+    profile_title: 'My Profile',
+    profile_user_type: 'User Type',
+    profile_language_preference: 'Preferred Language',
+    profile_citizen: 'Citizen',
+    profile_moderator: 'Moderator',
+    profile_admin: 'Administrator'
   }
 };
 
-// Créer le contexte
+/* ================================
+   CONTEXT
+================================ */
 export const LanguageContext = createContext();
 
-// Provider du contexte
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem('language');
-    return savedLanguage && translations[savedLanguage] ? savedLanguage : 'mg';
+    const saved = localStorage.getItem('language');
+    return saved && translations[saved] ? saved : 'mg';
   });
-  
-  // Synchroniser avec localStorage
+
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
-  
-  // Fonction de traduction
-  const t = (key, defaultValue = key) => {
-    return translations[language]?.[key] || defaultValue;
-  };
-  
-  // Changer la langue
-  const changeLanguage = (newLanguage) => {
-    if (translations[newLanguage]) {
-      setLanguage(newLanguage);
-    }
-  };
-  
+
+  const t = (key, fallback = key) =>
+    translations[language]?.[key] || fallback;
+
   return (
-    <LanguageContext.Provider value={{ 
-      language, 
-      setLanguage: changeLanguage, 
-      t 
-    }}>
+    <LanguageContext.Provider
+      value={{
+        language,
+        setLanguage,
+        t
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
 };
 
-// Hook personnalisé
+/* ================================
+   HOOK
+================================ */
 export const useTranslation = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useTranslation must be used within a LanguageProvider');
+    throw new Error(
+      'useTranslation must be used inside LanguageProvider'
+    );
   }
   return context;
 };

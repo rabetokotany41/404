@@ -1,6 +1,16 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Mpanolo-tsaina AI",
+  "short_name": "Mpanolo-tsaina",
+  "description": "Assistant intelligent de littératie médiatique pour Madagascar - Vérifiez la fiabilité des contenus éducatifs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "mg",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "utilities"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +20,59 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "shortcuts": [
+    {
+      "name": "Vérifier un contenu",
+      "short_name": "Vérifier",
+      "description": "Vérifier la fiabilité d'un contenu",
+      "url": "/check",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Apprendre",
+      "short_name": "Apprendre",
+      "description": "Modules d'apprentissage en littératie médiatique",
+      "url": "/learn",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Mon profil",
+      "short_name": "Profil",
+      "description": "Gérer mon profil et voir mes statistiques",
+      "url": "/profile",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "features": [
+    "Cross Platform",
+    "Fast",
+    "Works Offline"
+  ]
 }
